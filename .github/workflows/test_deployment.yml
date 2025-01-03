@@ -1,0 +1,110 @@
+name: Test Environment Check
+
+on:
+  push:
+    branches:
+      test
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  PoetrySetup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up python
+        id: setup-python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10.14'
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+          installer-parallel: true
+      - name: Load cached venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v3
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+      - name: Install dependencies
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+        run: poetry install --no-interaction --no-root
+      - name: Install project
+        run: poetry install --no-interaction
+
+      - name: Build the Docker image
+        run: |
+          poetry export --without-hashes --format=requirements.txt > requirements.txt
+          docker-compose build specifix_api
+      - name: Push Docker Image
+        run: |
+          docker tag specifix_api:latest plantphenotyper/specifix_test:auto
+          docker login -u plantphenotyper -p ${{ secrets.DOCKER }}
+          docker push plantphenotyper/specifix_test:auto
+
+      - name: Refresh docs
+        if: ${{ hashFiles('docs/') != '' }}
+        run:
+          rm -r docs
+      - name: Generate docs
+        run: |
+          poetry run sphinx-quickstart docs --quiet -p Specifix -a BUas -v 1.0 -t config/
+          poetry run sphinx-apidoc -o docs specifix/
+          pip install sphinx-rtd-theme
+          cd docs
+          poetry run make html
+      - name: Update changes
+        run: |
+          git config user.name "Borislav Nachev"
+          git config user.email "220472@buas.nl"
+          git fetch
+          git add .
+          git commit -m "test documentation auto commit"
+          git checkout test_documentation --
+          git merge test -Xtheirs --allow-unrelated-histories
+          poetry run python ./config/keep_documentation.py
+          git commit -m "test documentation auto commit"
+
+      - name: Push changes to source branch
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: test_documentation
+
+  DeployPages:
+    needs: PoetrySetup
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Checkout
+        run: |
+          git fetch
+          git checkout test_documentation --
+      - name: check
+        run: ls
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './docs/_build/html/'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
