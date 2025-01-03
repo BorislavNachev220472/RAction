@@ -56,7 +56,7 @@ jobs:
       - name: Build the Docker image
         run: |
           poetry export --without-hashes --format=requirements.txt > requirements.txt
-          docker-compose build inference_api
+          docker compose build inference_api
       - name: Push Docker Image
         run: |
           docker tag pyphenotyper:latest plantphenotyper/specifix:latest
