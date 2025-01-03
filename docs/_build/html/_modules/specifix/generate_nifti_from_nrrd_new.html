@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>specifix.generate_nifti_from_nrrd_new &mdash; Specifix 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Specifix
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">specifix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../specifix.fracture_reduction.html">specifix.fracture_reduction package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../specifix.html">specifix package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../specifix.segmentation.cli.io.html">specifix.segmentation.cli.io package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../specifix.segmentation.cli.html">specifix.segmentation.cli package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../specifix.segmentation.html">specifix.segmentation package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Specifix</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">specifix.generate_nifti_from_nrrd_new</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for specifix.generate_nifti_from_nrrd_new</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
+
+<span class="kn">import</span> <span class="nn">SimpleITK</span> <span class="k">as</span> <span class="nn">sitk</span>
+<span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<div class="viewcode-block" id="Label">
+<a class="viewcode-back" href="../../specifix.html#specifix.generate_nifti_from_nrrd_new.Label">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Label</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">label</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">variations</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+
+<div class="viewcode-block" id="Label.to_dict">
+<a class="viewcode-back" href="../../specifix.html#specifix.generate_nifti_from_nrrd_new.Label.to_dict">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">variation</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">}</span> <span class="k">for</span> <span class="n">variation</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">variations</span><span class="p">}</span></div>
+</div>
+
+
+
+<span class="n">debug_dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+
+<span class="c1"># Function to load an NRRD file and return the SimpleITK Image object</span>
+<div class="viewcode-block" id="load_nrrd_file">
+<a class="viewcode-back" href="../../specifix.html#specifix.generate_nifti_from_nrrd_new.load_nrrd_file">[docs]</a>
+<span class="k">def</span> <span class="nf">load_nrrd_file</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">sitk</span><span class="o">.</span><span class="n">ReadImage</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># Function to process a 2D slice from a 3D fragment</span>
+<div class="viewcode-block" id="process_slice">
+<a class="viewcode-back" href="../../specifix.html#specifix.generate_nifti_from_nrrd_new.process_slice">[docs]</a>
+<span class="k">def</span> <span class="nf">process_slice</span><span class="p">(</span><span class="n">slice_array</span><span class="p">,</span> <span class="n">label_value</span><span class="p">):</span>
+    <span class="n">processed_slice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">slice_array</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="n">label_value</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">processed_slice</span></div>
+
+
+
+<span class="c1"># Function to convert a SimpleITK image to a NIfTI file and save it</span>
+<div class="viewcode-block" id="convert_to_nifti">
+<a class="viewcode-back" href="../../specifix.html#specifix.generate_nifti_from_nrrd_new.convert_to_nifti">[docs]</a>
+<span class="k">def</span> <span class="nf">convert_to_nifti</span><span class="p">(</span><span class="n">sitk_image</span><span class="p">,</span> <span class="n">output_file_path</span><span class="p">):</span>
+    <span class="n">array</span> <span class="o">=</span> <span class="n">sitk</span><span class="o">.</span><span class="n">GetArrayFromImage</span><span class="p">(</span><span class="n">sitk_image</span><span class="p">)</span>
+    <span class="n">spacing</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sitk_image</span><span class="o">.</span><span class="n">GetSpacing</span><span class="p">())</span>
+    <span class="n">origin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sitk_image</span><span class="o">.</span><span class="n">GetOrigin</span><span class="p">())</span>
+    <span class="n">direction</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sitk_image</span><span class="o">.</span><span class="n">GetDirection</span><span class="p">())</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+    <span class="n">affine</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">affine</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">direction</span> <span class="o">*</span> <span class="n">spacing</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+    <span class="n">affine</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">origin</span>
+
+    <span class="n">nifti_image</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">Nifti1Image</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">affine</span><span class="p">)</span>
+    <span class="n">nib</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">nifti_image</span><span class="p">,</span> <span class="n">output_file_path</span><span class="p">)</span></div>
+
+    <span class="c1"># print(f&quot;NIfTI file saved at: {output_file_path}&quot;)</span>
+
+
+<div class="viewcode-block" id="process_nrrd">
+<a class="viewcode-back" href="../../specifix.html#specifix.generate_nifti_from_nrrd_new.process_nrrd">[docs]</a>
+<span class="k">def</span> <span class="nf">process_nrrd</span><span class="p">(</span><span class="n">current_folder</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">label_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">final_array</span><span class="p">:</span> <span class="p">[])</span> <span class="o">-&gt;</span> <span class="p">[]:</span>
+    <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">current_folder</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+    <span class="n">itk_fragment</span> <span class="o">=</span> <span class="n">sitk</span><span class="o">.</span><span class="n">ReadImage</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+    <span class="n">fragment_array</span> <span class="o">=</span> <span class="n">sitk</span><span class="o">.</span><span class="n">GetArrayFromImage</span><span class="p">(</span><span class="n">itk_fragment</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">fragment_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">processed_slice</span> <span class="o">=</span> <span class="n">process_slice</span><span class="p">(</span><span class="n">fragment_array</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">label_value</span><span class="p">)</span>
+        <span class="n">final_array</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">final_array</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">processed_slice</span><span class="p">,</span> <span class="n">final_array</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:])</span>
+
+    <span class="k">return</span> <span class="n">final_array</span></div>
+
+
+
+<div class="viewcode-block" id="append_record">
+<a class="viewcode-back" href="../../specifix.html#specifix.generate_nifti_from_nrrd_new.append_record">[docs]</a>
+<span class="k">def</span> <span class="nf">append_record</span><span class="p">(</span><span class="n">access_count_dictionary</span><span class="p">,</span> <span class="n">input_folder</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">labels</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">final_array</span><span class="p">:</span> <span class="p">[]):</span>
+    <span class="n">ct_scan</span> <span class="o">=</span> <span class="n">input_folder</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">ct_scan</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">debug_dict</span><span class="p">:</span>
+        <span class="n">debug_dict</span><span class="p">[</span><span class="n">ct_scan</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;count&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;duplicates&#39;</span><span class="p">:[],</span> <span class="s1">&#39;unknown&#39;</span><span class="p">:</span> <span class="p">[]}</span>
+            
+    <span class="n">debug_dict</span><span class="p">[</span><span class="n">ct_scan</span><span class="p">][</span><span class="s1">&#39;count&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">filename_processed</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\b(fin|final|-)\b&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filename</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;.nrrd&#39;</span>
+    
+    <span class="k">if</span> <span class="n">filename_processed</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">labels</span><span class="p">[</span><span class="n">filename_processed</span><span class="p">][</span><span class="s1">&#39;label&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">access_count_dictionary</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Duplicate label found for: </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">. Record </span><span class="si">{</span><span class="n">input_folder</span><span class="si">}</span><span class="s2"> has multiple </span><span class="si">{</span><span class="n">labels</span><span class="p">[</span><span class="n">filename_processed</span><span class="p">][</span><span class="s1">&#39;label&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">!&quot;</span><span class="p">)</span>
+            <span class="n">debug_dict</span><span class="p">[</span><span class="n">ct_scan</span><span class="p">][</span><span class="s1">&#39;duplicates&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+            <span class="c1">#raise ValueError(</span>
+            <span class="c1">#    f&quot;Duplicate label found for: {filename}. Record {input_folder} has multiple {labels[filename][&#39;label&#39;]}!&quot;</span>
+            <span class="c1">#)</span>
+        
+        <span class="n">final_array</span> <span class="o">=</span> <span class="n">process_nrrd</span><span class="p">(</span><span class="n">input_folder</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">labels</span><span class="p">[</span><span class="n">filename_processed</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">final_array</span><span class="p">)</span>
+        <span class="n">access_count_dictionary</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="n">filename_processed</span><span class="p">][</span><span class="s1">&#39;label&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown label: </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">. Record </span><span class="si">{</span><span class="n">input_folder</span><span class="si">}</span><span class="s2"> doesn&#39;t have a corresponding label variation!&quot;</span><span class="p">)</span>
+        <span class="n">debug_dict</span><span class="p">[</span><span class="n">ct_scan</span><span class="p">][</span><span class="s1">&#39;unknown&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="c1"># final_array = process_nrrd(input_folder, filename, label_value=labels[&#39;unknown&#39;][&#39;id&#39;], final_array=final_array)</span>
+        <span class="c1"># raise ValueError(</span>
+        <span class="c1">#    f&quot;Unknown label: {filename}. Record {input_folder} doesn&#39;t have a corresponding label variation!&quot;)</span>
+
+    <span class="k">return</span> <span class="n">final_array</span></div>
+
+
+
+<span class="c1"># Function to merge segmentation fragments from .nrrd files and save as a single .nii.gz file</span>
+<div class="viewcode-block" id="merge_fragments_and_save_nifti">
+<a class="viewcode-back" href="../../specifix.html#specifix.generate_nifti_from_nrrd_new.merge_fragments_and_save_nifti">[docs]</a>
+<span class="k">def</span> <span class="nf">merge_fragments_and_save_nifti</span><span class="p">(</span><span class="n">access_count_dictionary</span><span class="p">,</span> <span class="n">input_folder</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">labels</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">nrrd_folder</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="c1"># Create an iterator fromm all files and get the first NRRD file to get image dimensions and spacing</span>
+    <span class="n">current_files_iterator</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">((</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">nrrd_folder</span><span class="p">)</span> <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.nrrd&#39;</span><span class="p">)))</span>
+    <span class="n">first_filename</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">current_files_iterator</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">first_filename</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No .nrrd files found in directory </span><span class="si">{</span><span class="n">nrrd_folder</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+    <span class="n">itk_image</span> <span class="o">=</span> <span class="n">sitk</span><span class="o">.</span><span class="n">ReadImage</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_folder</span><span class="p">,</span> <span class="n">first_filename</span><span class="p">))</span>
+    <span class="n">first_array</span> <span class="o">=</span> <span class="n">sitk</span><span class="o">.</span><span class="n">GetArrayFromImage</span><span class="p">(</span><span class="n">itk_image</span><span class="p">)</span>
+    <span class="n">final_array</span> <span class="o">=</span> <span class="n">append_record</span><span class="p">(</span><span class="n">access_count_dictionary</span><span class="o">=</span><span class="n">access_count_dictionary</span><span class="p">,</span>
+                                <span class="n">input_folder</span><span class="o">=</span><span class="n">input_folder</span><span class="p">,</span>
+                                <span class="n">filename</span><span class="o">=</span><span class="n">first_filename</span><span class="p">,</span>
+                                <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span>
+                                <span class="n">final_array</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">first_array</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">current_files_iterator</span><span class="p">:</span>
+        <span class="n">final_array</span> <span class="o">=</span> <span class="n">append_record</span><span class="p">(</span><span class="n">access_count_dictionary</span><span class="p">,</span> <span class="n">input_folder</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">final_array</span><span class="p">)</span>
+
+    <span class="c1"># if len(access_count_dictionary.keys()) != total_labels_count:</span>
+    <span class="c1">#     raise ValueError(</span>
+    <span class="c1">#         f&quot;Labels count must be {len(labels.keys())}. Record {nrrd_folder} doesn&#39;t have all specified labels!&quot;</span>
+    <span class="c1">#         f&quot;Labels value: {labels.keys()}&quot;)</span>
+
+    <span class="c1"># Create a SimpleITK image from the final array</span>
+    <span class="n">final_itk_image</span> <span class="o">=</span> <span class="n">sitk</span><span class="o">.</span><span class="n">GetImageFromArray</span><span class="p">(</span><span class="n">final_array</span><span class="p">)</span>
+    <span class="n">final_itk_image</span><span class="o">.</span><span class="n">SetSpacing</span><span class="p">(</span><span class="n">itk_image</span><span class="o">.</span><span class="n">GetSpacing</span><span class="p">())</span>
+    <span class="n">final_itk_image</span><span class="o">.</span><span class="n">SetOrigin</span><span class="p">(</span><span class="n">itk_image</span><span class="o">.</span><span class="n">GetOrigin</span><span class="p">())</span>
+    <span class="n">final_itk_image</span><span class="o">.</span><span class="n">SetDirection</span><span class="p">(</span><span class="n">itk_image</span><span class="o">.</span><span class="n">GetDirection</span><span class="p">())</span>
+
+    <span class="c1"># Save as NIfTI</span>
+    <span class="n">convert_to_nifti</span><span class="p">(</span><span class="n">final_itk_image</span><span class="p">,</span> <span class="n">output_file_path</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># Main function to process a single folder</span>
+<div class="viewcode-block" id="process_single_folder">
+<a class="viewcode-back" href="../../specifix.html#specifix.generate_nifti_from_nrrd_new.process_single_folder">[docs]</a>
+<span class="k">def</span> <span class="nf">process_single_folder</span><span class="p">(</span><span class="n">input_folder</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">labels</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">nrrd_folder</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_folder</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                          <span class="n">output_file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    
+    <span class="n">access_count_dictionary</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">output_folder</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_folder</span><span class="p">)</span>
+
+    <span class="n">output_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">output_file_name</span><span class="si">}</span><span class="s2">.nii.gz&quot;</span><span class="p">)</span>
+    <span class="n">merge_fragments_and_save_nifti</span><span class="p">(</span><span class="n">access_count_dictionary</span><span class="p">,</span> <span class="n">input_folder</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">nrrd_folder</span><span class="p">,</span> <span class="n">output_file_path</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># Example usage for a single folder</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">output_folder</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;E:\Projects\Buas\Year3\2024-25ab-fai3-specialisation-project-team-specifix-1\data\Masks_&amp;_Meshes\F034\output2&quot;</span>
+    <span class="n">output_file_name</span> <span class="o">=</span> <span class="s2">&quot;merged_labels4&quot;</span>
+
+    <span class="n">data_structure</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">Label</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;radial&quot;</span><span class="p">,</span> <span class="n">variations</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;R.nrrd&#39;</span><span class="p">]),</span>
+        <span class="n">Label</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;ulnar&quot;</span><span class="p">,</span> <span class="n">variations</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pU.nrrd&#39;</span><span class="p">]),</span>
+        <span class="n">Label</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;metaphysis&quot;</span><span class="p">,</span> <span class="n">variations</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;M1.nrrd&#39;</span><span class="p">,</span> <span class="s1">&#39;M0.nrrd&#39;</span><span class="p">]),</span>
+        <span class="n">Label</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;dR&quot;</span><span class="p">,</span> <span class="n">variations</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;dR.nrrd&#39;</span><span class="p">,</span> <span class="s1">&#39;dDR.nrrd&#39;</span><span class="p">,</span> <span class="s1">&#39;dVR.nrrd&#39;</span><span class="p">,</span> <span class="s1">&#39;dRU.nrrd&#39;</span><span class="p">]),</span>
+        <span class="n">Label</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;dD&quot;</span><span class="p">,</span> <span class="n">variations</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;dD.nrrd&#39;</span><span class="p">,</span> <span class="s1">&#39;dDC.nrrd&#39;</span><span class="p">,</span> <span class="s1">&#39;dDRU.nrrd&#39;</span><span class="p">]),</span>
+        <span class="n">Label</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;dV&quot;</span><span class="p">,</span> <span class="n">variations</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;dV.nrrd&#39;</span><span class="p">,</span> <span class="s1">&#39;dVC.nrrd&#39;</span><span class="p">,</span> <span class="s1">&#39;dVRU.nrrd&#39;</span><span class="p">]),</span>
+        <span class="n">Label</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;dU&quot;</span><span class="p">,</span> <span class="n">variations</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;dU.nrrd&#39;</span><span class="p">,</span> <span class="s1">&#39;dDU.nrrd&#39;</span><span class="p">,</span> <span class="s1">&#39;dDU1.nrrd&#39;</span><span class="p">,</span> <span class="s1">&#39;dDU2.nrrd&#39;</span><span class="p">,</span> <span class="s1">&#39;dVU.nrrd&#39;</span><span class="p">,</span> <span class="s1">&#39;dLU.nrrd&#39;</span><span class="p">]),</span>
+        <span class="n">Label</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;dC&quot;</span><span class="p">,</span> <span class="n">variations</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;dC.nrrd&#39;</span><span class="p">,</span> <span class="s1">&#39;dL.nrrd&#39;</span><span class="p">]),</span>
+        <span class="n">Label</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;dorso-ulnar&quot;</span><span class="p">,</span>
+              <span class="n">variations</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;p1DU1&#39;</span><span class="p">,</span> <span class="s1">&#39;p1DU&#39;</span><span class="p">,</span> <span class="s1">&#39;pDU&#39;</span><span class="p">,</span> <span class="s1">&#39;pDU1&#39;</span><span class="p">,</span> <span class="s1">&#39;DU&#39;</span><span class="p">,</span> <span class="s1">&#39;p1DU1&#39;</span><span class="p">,</span> <span class="s1">&#39;p1DU2&#39;</span><span class="p">,</span> <span class="s1">&#39;pDU2&#39;</span><span class="p">,</span> <span class="s1">&#39;p1DU3&#39;</span><span class="p">,</span> <span class="s1">&#39;pDU3&#39;</span><span class="p">,</span> <span class="s1">&#39;p2DU1&#39;</span><span class="p">,</span>
+                          <span class="s1">&#39;p2DU&#39;</span><span class="p">,</span> <span class="s1">&#39;p2DU1&#39;</span><span class="p">,</span> <span class="s1">&#39;p2DU2&#39;</span><span class="p">,</span> <span class="s1">&#39;p2DU3&#39;</span><span class="p">]),</span>
+        <span class="n">Label</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;dorso-radial&quot;</span><span class="p">,</span>
+              <span class="n">variations</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;p1DR1&#39;</span><span class="p">,</span> <span class="s1">&#39;pDR&#39;</span><span class="p">,</span> <span class="s1">&#39;p1DR&#39;</span><span class="p">,</span> <span class="s1">&#39;DR&#39;</span><span class="p">,</span> <span class="s1">&#39;pDR1&#39;</span><span class="p">,</span> <span class="s1">&#39;p1DR1&#39;</span><span class="p">,</span> <span class="s1">&#39;p1DR2&#39;</span><span class="p">,</span> <span class="s1">&#39;pDR2&#39;</span><span class="p">,</span> <span class="s1">&#39;p1DR3&#39;</span><span class="p">,</span> <span class="s1">&#39;pDR3&#39;</span><span class="p">,</span> <span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;p1L&#39;</span><span class="p">,</span>
+                          <span class="s1">&#39;p2L&#39;</span><span class="p">,</span> <span class="s1">&#39;pDC&#39;</span><span class="p">,</span> <span class="s1">&#39;p2DR&#39;</span><span class="p">,</span> <span class="s1">&#39;p2DR1&#39;</span><span class="p">,</span> <span class="s1">&#39;p2DR2&#39;</span><span class="p">,</span> <span class="s1">&#39;p2DR3&#39;</span><span class="p">]),</span>
+        <span class="n">Label</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;volar-radial&quot;</span><span class="p">,</span>
+              <span class="n">variations</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;p1VR1&#39;</span><span class="p">,</span> <span class="s1">&#39;pVR&#39;</span><span class="p">,</span> <span class="s1">&#39;p1VR1&#39;</span><span class="p">,</span> <span class="s1">&#39;pVR1&#39;</span><span class="p">,</span> <span class="s1">&#39;p1VR&#39;</span><span class="p">,</span> <span class="s1">&#39;p1VR2&#39;</span><span class="p">,</span> <span class="s1">&#39;pVR2&#39;</span><span class="p">,</span> <span class="s1">&#39;p1VR2&#39;</span><span class="p">,</span> <span class="s1">&#39;VR&#39;</span><span class="p">,</span> <span class="s1">&#39;p2VR1&#39;</span><span class="p">,</span> <span class="s1">&#39;p2VR&#39;</span><span class="p">,</span>
+                          <span class="s1">&#39;p2VR1&#39;</span><span class="p">,</span> <span class="s1">&#39;p2VR2&#39;</span><span class="p">,</span> <span class="s1">&#39;pV&#39;</span><span class="p">]),</span>
+        <span class="n">Label</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;volar-ulnar&quot;</span><span class="p">,</span>
+              <span class="n">variations</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;p1VU&#39;</span><span class="p">,</span> <span class="s1">&#39;p1VU1&#39;</span><span class="p">,</span> <span class="s1">&#39;VU&#39;</span><span class="p">,</span> <span class="s1">&#39;pVU&#39;</span><span class="p">,</span> <span class="s1">&#39;pVU1&#39;</span><span class="p">,</span> <span class="s1">&#39;p1VU1&#39;</span><span class="p">,</span> <span class="s1">&#39;p1VU&#39;</span><span class="p">,</span> <span class="s1">&#39;p1VU2&#39;</span><span class="p">,</span> <span class="s1">&#39;p1VU2&#39;</span><span class="p">,</span> <span class="s1">&#39;pVU2&#39;</span><span class="p">,</span> <span class="s1">&#39;VU&#39;</span><span class="p">,</span>
+                          <span class="s1">&#39;p2VU1&#39;</span><span class="p">,</span> <span class="s1">&#39;p2VU&#39;</span><span class="p">,</span> <span class="s1">&#39;p2VU1&#39;</span><span class="p">,</span> <span class="s1">&#39;p2VU2&#39;</span><span class="p">]),</span>
+        <span class="n">Label</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;ulna&quot;</span><span class="p">,</span>
+              <span class="n">variations</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Ulna broken.nrrd&#39;</span><span class="p">,</span> <span class="s1">&#39;Ulna Broken.nrrd&#39;</span><span class="p">,</span> <span class="s1">&#39;Ulna CL.nrrd&#39;</span><span class="p">,</span> <span class="s1">&#39;Ulna.nrrd&#39;</span><span class="p">,</span> <span class="s1">&#39;Ulna Borken.nrrd&#39;</span><span class="p">]),</span>
+        <span class="n">Label</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;dINTACT&quot;</span><span class="p">,</span> <span class="n">variations</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;dINTACT.nrrd&#39;</span><span class="p">]),</span>
+        <span class="n">Label</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span> <span class="n">variations</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;unknown&#39;</span><span class="p">])</span>
+    <span class="p">]</span>
+
+    <span class="n">combined_dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">data_structure</span><span class="p">:</span>
+        <span class="n">combined_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">label</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+
+    <span class="c1"># Process the folder and generate the NIfTI file</span>
+    <span class="n">process_single_folder</span><span class="p">(</span><span class="n">combined_dict</span><span class="p">,</span> <span class="n">nrrd_folder</span><span class="p">,</span> <span class="n">output_folder</span><span class="p">,</span> <span class="n">output_file_name</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">debug_dict</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, BUas.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
