@@ -46,39 +46,39 @@ jobs:
         run: poetry install --no-interaction
 
 
-      - name: Push to PyPl
-        run: |
-          poetry config pypi-token.pypi ${{ secrets.PYPL }}
-          poetry build
-          poetry publish
+      #      - name: Push to PyPl
+      #        run: |
+      #          poetry config pypi-token.pypi ${{ secrets.PYPL }}
+      #          poetry build
+      #          poetry publish
 
 
-      - name: Build the Docker image
-        run: |
-          poetry export --without-hashes --format=requirements.txt > requirements.txt
-          docker-compose build inference_api
-      - name: Push Docker Image
-        run: |
-          docker tag pyphenotyper:latest plantphenotyper/pyphenotyper:latest
-          docker login -u plantphenotyper -p ${{ secrets.DOCKER }}
-          docker push plantphenotyper/pyphenotyper:latest
+      #      - name: Build the Docker image
+      #        run: |
+      #          poetry export --without-hashes --format=requirements.txt > requirements.txt
+      #          docker compose build inference_api
+      #      - name: Push Docker Image
+      #        run: |
+      #          docker tag pyphenotyper:latest plantphenotyper/specifix:latest
+      #          docker login -u plantphenotyper -p ${{ secrets.DOCKER }}
+      #          docker push plantphenotyper/specifix:latest
 
-      - name: 'Login via Azure CLI'
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      #      - name: 'Login via Azure CLI'
+      #        uses: azure/login@v1
+      #        with:
+      #          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: 'Deploy to Azure Container Instances'
-        uses: 'azure/aci-deploy@v1'
-        with:
-          resource-group: ${{ secrets.RESOURCE_GROUP }}
-          dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
-          image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:${{ github.sha }}
-          registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-          registry-username: ${{ secrets.REGISTRY_USERNAME }}
-          registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-          name: aci-sampleapp
-          location: 'west us'
+      #      - name: 'Deploy to Azure Container Instances'
+      #        uses: 'azure/aci-deploy@v1'
+      #        with:
+      #          resource-group: ${{ secrets.RESOURCE_GROUP }}
+      #          dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
+      #          image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:${{ github.sha }}
+      #          registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+      #          registry-username: ${{ secrets.REGISTRY_USERNAME }}
+      #          registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+      #          name: aci-sampleapp
+      #          location: 'west us'
 
 
       - name: Refresh docs
@@ -87,8 +87,8 @@ jobs:
           rm -r docs
       - name: Generate docs
         run: |
-          poetry run sphinx-quickstart docs --quiet -p NPEC -a BUas -v 1.0 -t config/
-          poetry run sphinx-apidoc -o docs pyphenotyper/
+          poetry run sphinx-quickstart docs --quiet -p Specifix -a BUas -v 1.0 -t config/
+          poetry run sphinx-apidoc -o docs specifix/
           pip install sphinx-rtd-theme
           cd docs
           poetry run make html

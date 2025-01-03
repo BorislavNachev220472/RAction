@@ -45,15 +45,15 @@ jobs:
       - name: Install project
         run: poetry install --no-interaction
 
-      - name: Build the Docker image
-        run: |
-          poetry export --without-hashes --format=requirements.txt > requirements.txt
-          docker-compose build specifix_api
-      - name: Push Docker Image
-        run: |
-          docker tag specifix_api:latest plantphenotyper/specifix_test:auto
-          docker login -u plantphenotyper -p ${{ secrets.DOCKER }}
-          docker push plantphenotyper/specifix_test:auto
+      #      - name: Build the Docker image
+      #        run: |
+      #          poetry export --without-hashes --format=requirements.txt > requirements.txt
+      #          docker compose build specifix_api
+      #      - name: Push Docker Image
+      #        run: |
+      #          docker tag specifix_api:latest plantphenotyper/specifix_test:auto
+      #          docker login -u plantphenotyper -p ${{ secrets.DOCKER }}
+      #          docker push plantphenotyper/specifix_test:auto
 
       - name: Refresh docs
         if: ${{ hashFiles('docs/') != '' }}
