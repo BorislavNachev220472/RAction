@@ -62,7 +62,7 @@ jobs:
       - name: Generate docs
         run: |
           poetry run sphinx-quickstart docs --quiet -p Specifix -a BUas -v 1.0 -t config/
-          cp config/conf.py_t docs/source/conf.py
+          cp config/conf.py_t docs/conf.py
           poetry run sphinx-apidoc -o docs specifix/
           pip install sphinx-rtd-theme
           cd docs
