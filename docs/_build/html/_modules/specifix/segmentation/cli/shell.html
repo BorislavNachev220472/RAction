@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>specifix.segmentation.cli.shell &mdash; Specifix 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            Specifix
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules.html">specifix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../specifix.fracture_reduction.html">specifix.fracture_reduction package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../specifix.html">specifix package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../specifix.segmentation.cli.io.html">specifix.segmentation.cli.io package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../specifix.segmentation.cli.html">specifix.segmentation.cli package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../specifix.segmentation.html">specifix.segmentation package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Specifix</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">specifix.segmentation.cli.shell</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for specifix.segmentation.cli.shell</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">skimage.feature</span>
+<span class="kn">import</span> <span class="nn">skimage.measure</span>
+<span class="kn">import</span> <span class="nn">skimage.morphology</span>
+
+<span class="kn">import</span> <span class="nn">SimpleITK</span> <span class="k">as</span> <span class="nn">sitk</span>
+
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">ndimage</span>
+<span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="kn">import</span> <span class="n">ThreadPoolExecutor</span>
+
+<span class="kn">from</span> <span class="nn">specifix.segmentation.cli.config</span> <span class="kn">import</span> <span class="n">Config</span>
+<span class="kn">from</span> <span class="nn">specifix.segmentation.cli.converter</span> <span class="kn">import</span> <span class="n">Converter</span>
+<span class="kn">from</span> <span class="nn">specifix.segmentation.cli.io</span> <span class="kn">import</span> <span class="n">BoneIOFileManager</span>
+
+
+<div class="viewcode-block" id="Shell">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.html#specifix.segmentation.cli.shell.Shell">[docs]</a>
+<span class="k">class</span> <span class="nc">Shell</span><span class="p">(</span><span class="n">BoneIOFileManager</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">reference_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">input_directory</span><span class="p">,</span> <span class="n">output_directory</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Converter</span> <span class="o">=</span> <span class="n">Converter</span><span class="p">(</span><span class="n">reference_filename</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Shell.perform_morphological_closing">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.html#specifix.segmentation.cli.shell.Shell.perform_morphological_closing">[docs]</a>
+    <span class="k">def</span> <span class="nf">perform_morphological_closing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mask</span><span class="p">:</span> <span class="n">sitk</span><span class="o">.</span><span class="n">Image</span><span class="p">,</span> <span class="n">iterations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Perform morphological closing (dilation followed by erosion) on the mask.&quot;&quot;&quot;</span>
+        <span class="c1"># Increase the structuring element size to connect more features</span>
+        <span class="n">dilated_mask</span> <span class="o">=</span> <span class="n">skimage</span><span class="o">.</span><span class="n">morphology</span><span class="o">.</span><span class="n">binary_dilation</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">footprint</span><span class="o">=</span><span class="n">skimage</span><span class="o">.</span><span class="n">morphology</span><span class="o">.</span><span class="n">disk</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iterations</span><span class="p">):</span>
+            <span class="n">dilated_mask</span> <span class="o">=</span> <span class="n">skimage</span><span class="o">.</span><span class="n">morphology</span><span class="o">.</span><span class="n">binary_dilation</span><span class="p">(</span><span class="n">dilated_mask</span><span class="p">,</span> <span class="n">footprint</span><span class="o">=</span><span class="n">skimage</span><span class="o">.</span><span class="n">morphology</span><span class="o">.</span><span class="n">disk</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+
+        <span class="n">closed_mask</span> <span class="o">=</span> <span class="n">dilated_mask</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iterations</span><span class="p">):</span>
+            <span class="n">closed_mask</span> <span class="o">=</span> <span class="n">skimage</span><span class="o">.</span><span class="n">morphology</span><span class="o">.</span><span class="n">binary_erosion</span><span class="p">(</span><span class="n">closed_mask</span><span class="p">,</span> <span class="n">footprint</span><span class="o">=</span><span class="n">skimage</span><span class="o">.</span><span class="n">morphology</span><span class="o">.</span><span class="n">disk</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">closed_mask</span></div>
+
+
+<div class="viewcode-block" id="Shell.thicken_boundary">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.html#specifix.segmentation.cli.shell.Shell.thicken_boundary">[docs]</a>
+    <span class="k">def</span> <span class="nf">thicken_boundary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mask</span><span class="p">:</span> <span class="n">sitk</span><span class="o">.</span><span class="n">Image</span><span class="p">,</span> <span class="n">iterations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Thicken boundary lines to avoid breaking during erosion.&quot;&quot;&quot;</span>
+        <span class="n">thickened</span> <span class="o">=</span> <span class="n">mask</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iterations</span><span class="p">):</span>
+            <span class="n">thickened</span> <span class="o">=</span> <span class="n">skimage</span><span class="o">.</span><span class="n">morphology</span><span class="o">.</span><span class="n">binary_dilation</span><span class="p">(</span><span class="n">thickened</span><span class="p">,</span> <span class="n">footprint</span><span class="o">=</span><span class="n">skimage</span><span class="o">.</span><span class="n">morphology</span><span class="o">.</span><span class="n">disk</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">thickened</span></div>
+
+
+<div class="viewcode-block" id="Shell.remove_inner_artifacts">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.html#specifix.segmentation.cli.shell.Shell.remove_inner_artifacts">[docs]</a>
+    <span class="k">def</span> <span class="nf">remove_inner_artifacts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mask</span><span class="p">:</span> <span class="n">sitk</span><span class="o">.</span><span class="n">Image</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Remove any small internal artifacts that may remain inside the object.&quot;&quot;&quot;</span>
+        <span class="n">labeled_mask</span><span class="p">,</span> <span class="n">num_features</span> <span class="o">=</span> <span class="n">ndimage</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">num_features</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Return the original mask if no features are found</span>
+            <span class="k">return</span> <span class="n">mask</span>
+
+        <span class="n">sizes</span> <span class="o">=</span> <span class="n">ndimage</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">labeled_mask</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_features</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sizes</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c1"># If no valid components were found, return the original mask</span>
+            <span class="k">return</span> <span class="n">mask</span>
+
+        <span class="c1"># Consider only the largest connected component as the outer boundary</span>
+        <span class="n">largest_component</span> <span class="o">=</span> <span class="n">sizes</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">cleaned_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">labeled_mask</span> <span class="o">==</span> <span class="n">largest_component</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">cleaned_mask</span></div>
+
+
+<div class="viewcode-block" id="Shell.extract_outer_boundary">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.html#specifix.segmentation.cli.shell.Shell.extract_outer_boundary">[docs]</a>
+    <span class="k">def</span> <span class="nf">extract_outer_boundary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mask</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract only the outer boundary of the object, ignoring any internal edges.&quot;&quot;&quot;</span>
+        <span class="c1"># Create a binary mask by filling holes</span>
+        <span class="n">filled_mask</span> <span class="o">=</span> <span class="n">ndimage</span><span class="o">.</span><span class="n">binary_fill_holes</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+
+        <span class="c1"># Perform morphological closing to smooth and expand the boundaries</span>
+        <span class="n">closed_mask</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perform_morphological_closing</span><span class="p">(</span><span class="n">filled_mask</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Remove any inner artifacts that might remain</span>
+        <span class="n">cleaned_mask</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove_inner_artifacts</span><span class="p">(</span><span class="n">closed_mask</span><span class="p">)</span>
+
+        <span class="c1"># Subtract the eroded mask from the closed mask to get only the outer boundary</span>
+        <span class="n">eroded_mask</span> <span class="o">=</span> <span class="n">skimage</span><span class="o">.</span><span class="n">morphology</span><span class="o">.</span><span class="n">binary_erosion</span><span class="p">(</span><span class="n">cleaned_mask</span><span class="p">,</span> <span class="n">footprint</span><span class="o">=</span><span class="n">skimage</span><span class="o">.</span><span class="n">morphology</span><span class="o">.</span><span class="n">disk</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">outer_boundary</span> <span class="o">=</span> <span class="n">cleaned_mask</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">eroded_mask</span>
+        <span class="n">outer_boundary</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">thicken_boundary</span><span class="p">(</span><span class="n">outer_boundary</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">outer_boundary</span></div>
+
+
+<div class="viewcode-block" id="Shell.process_single_mask">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.html#specifix.segmentation.cli.shell.Shell.process_single_mask">[docs]</a>
+    <span class="k">def</span> <span class="nf">process_single_mask</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mask</span><span class="p">:</span> <span class="n">sitk</span><span class="o">.</span><span class="n">Image</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function converts each nrrd to its slices and applies the shell algorithm on eahc slice.</span>
+<span class="sd">        :param mask: sitk.Image representing the current nrrd.</span>
+<span class="sd">        :param filename: str ussed to filter junk files generated by the labeling software.</span>
+<span class="sd">        :return: None/processed slices and the sitk.Image object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">keyword</span> <span class="ow">in</span> <span class="n">filename</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">keyword</span> <span class="ow">in</span>
+                   <span class="p">[</span><span class="s2">&quot;cyan&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;cl&quot;</span><span class="p">,</span> <span class="s2">&quot;small&quot;</span><span class="p">,</span> <span class="s2">&quot;region b&quot;</span><span class="p">,</span> <span class="s2">&quot;radius&quot;</span><span class="p">,</span> <span class="s2">&quot;yellow&quot;</span><span class="p">]):</span>
+            <span class="n">mask_size</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">GetSize</span><span class="p">()</span>
+            <span class="n">processed_slices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">mask_size</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">mask_size</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">mask_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">mask_size</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>
+                <span class="n">mask_slice</span> <span class="o">=</span> <span class="n">mask</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">]</span>
+                <span class="n">processed_slice</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_outer_boundary</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Converter</span><span class="o">.</span><span class="n">get_array_from_image</span><span class="p">(</span><span class="n">mask_slice</span><span class="p">))</span>
+                <span class="n">processed_slices</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">(</span><span class="n">processed_slice</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">processed_slices</span><span class="p">,</span> <span class="n">mask</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="Shell.process_ct_scan">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.html#specifix.segmentation.cli.shell.Shell.process_ct_scan">[docs]</a>
+    <span class="k">def</span> <span class="nf">process_ct_scan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ct_scan</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">labels_output_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function generates a shell for a single CT scan. It loops through the nrrds and generates a nifti file</span>
+<span class="sd">        with their shelled version.</span>
+<span class="sd">        The CT scan should be stored in the following way:</span>
+<span class="sd">        CT_SCAN_NAME</span>
+<span class="sd">            - nrrd</span>
+<span class="sd">                - *files*</span>
+<span class="sd">        :param ct_scan: str the name of folder of the CT scan that contains its nrrds.</span>
+<span class="sd">        :param labels_output_path: str the output name of the generated nifti file.</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mask_filenames</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_inner_folder</span><span class="p">(</span><span class="n">ct_scan</span><span class="p">)</span>
+                              <span class="o">.</span><span class="n">set_inner_folder</span><span class="p">(</span><span class="n">Config</span><span class="o">.</span><span class="n">NRRD_INNER_DIRECTORY</span><span class="p">)</span>
+                              <span class="o">.</span><span class="n">read_all</span><span class="p">()</span> <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">Config</span><span class="o">.</span><span class="n">NRRD_EXTENSION</span><span class="p">))</span>
+
+        <span class="n">final_mask_array</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">with</span> <span class="n">ThreadPoolExecutor</span><span class="p">()</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+            <span class="n">futures</span> <span class="o">=</span> <span class="p">[</span><span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">process_single_mask</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">set_inner_folder</span><span class="p">(</span><span class="n">ct_scan</span><span class="p">)</span>
+                                                                  <span class="o">.</span><span class="n">set_inner_folder</span><span class="p">(</span><span class="n">Config</span><span class="o">.</span><span class="n">NRRD_INNER_DIRECTORY</span><span class="p">))</span>
+                                       <span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">filename</span><span class="p">),</span> <span class="n">filename</span><span class="p">)</span> <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">mask_filenames</span><span class="p">]</span>
+
+            <span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="n">futures</span><span class="p">:</span>
+                <span class="n">processed_slices</span><span class="p">,</span> <span class="n">mask</span> <span class="o">=</span> <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">final_mask_array</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">final_mask_array</span> <span class="o">=</span> <span class="n">processed_slices</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">final_mask_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">final_mask_array</span><span class="p">,</span> <span class="n">processed_slices</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">final_mask_array</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">final_mask_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">(</span><span class="n">final_mask_array</span><span class="p">)</span>
+            <span class="n">final_mask</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Converter</span><span class="o">.</span><span class="n">get_image_from_array</span><span class="p">(</span><span class="n">final_mask_array</span><span class="p">)</span>
+            <span class="n">final_mask</span><span class="o">.</span><span class="n">SetSpacing</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Converter</span><span class="o">.</span><span class="n">reference_image</span><span class="o">.</span><span class="n">GetSpacing</span><span class="p">())</span>
+            <span class="n">final_mask</span><span class="o">.</span><span class="n">SetOrigin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Converter</span><span class="o">.</span><span class="n">reference_image</span><span class="o">.</span><span class="n">GetOrigin</span><span class="p">())</span>
+            <span class="n">final_mask</span><span class="o">.</span><span class="n">SetDirection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Converter</span><span class="o">.</span><span class="n">reference_image</span><span class="o">.</span><span class="n">GetDirection</span><span class="p">())</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">save_file</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">final_mask</span><span class="p">,</span> <span class="n">file_name</span><span class="o">=</span><span class="n">labels_output_path</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Processed mask saved to </span><span class="si">{</span><span class="n">labels_output_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, BUas.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

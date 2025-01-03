@@ -1,30 +1,86 @@
 # Configuration file for the Sphinx documentation builder.
 #
-# For the full list of built-in configuration values, see the documentation:
+# This file only contains a selection of the most common options. For a full
+# list see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
+# -- Path setup --------------------------------------------------------------
+
+# If extensions (or modules to document with autodoc) are in another directory,
+# add these directories to sys.PATH here. If the directory is relative to the
+# documentation root, use os.PATH.abspath to make it absolute, like shown here.
+#
+import os
+import sys
+
+sys.path.insert(0, os.path.abspath('..'))
+
+
 # -- Project information -----------------------------------------------------
-# https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'Specifix'
-copyright = '2025, BUas'
+copyright = '2024, BUas'
 author = 'BUas'
 
 version = '1.0'
 release = '1.0'
 
 # -- General configuration ---------------------------------------------------
-# https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
+# -- General configuration
 
-extensions = []
+extensions = [
 
-templates_path = ['_templates']
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+    'sphinx.ext.autodoc',
+    'sphinx.ext.viewcode',
+    'sphinx.ext.napoleon'
+]
 
+intersphinx_mapping = {
+    "rtd": ("https://docs.readthedocs.io/en/stable/", None),
+    "python": ("https://docs.python.org/3/", None),
+    "sphinx": ("https://www.sphinx-doc.org/en/master/", None),
+}
+intersphinx_disabled_domains = ["std"]
 
+templates_path = ["_templates"]
+
+# -- Options for EPUB output
+epub_show_urls = "footnote"
+
+# List of patterns, relative to source directory, that match files and
+# directories to ignore when looking for source files.
+# This pattern also affects html_static_path and html_extra_path.
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 # -- Options for HTML output -------------------------------------------------
-# https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'alabaster'
-html_static_path = ['_static']
+# The theme to use for HTML and HTML Help pages.  See the documentation for
+# a list of builtin themes.
+#
+html_theme = "sphinx_rtd_theme"
+
+master_doc = "index"
+
+# Add any paths that contain custom static files (such as style sheets) here,
+# relative to this directory. They are copied after the builtin static files,
+# so a file named "default.css" will overwrite the builtin "default.css".
+html_static_path = ["_static"]
+
+
+
+import os
+
+
+def generate_index():
+    docs_dir = os.path.dirname(__file__)
+    rst_files = [f for f in os.listdir(docs_dir) if f.endswith('.rst') and f != 'index.rst']
+    with open(os.path.join(docs_dir, 'index.rst'), 'w') as index_file:
+        index_file.write("Welcome to MyProject's documentation!\n")
+        index_file.write("=====================================\n\n")
+        index_file.write(".. toctree::\n")
+        index_file.write("   :maxdepth: 2\n\n")
+        for rst_file in sorted(rst_files):
+            index_file.write(f"   {rst_file[:-4]}\n")  # Remove the .rst extension
+
+
+generate_index()

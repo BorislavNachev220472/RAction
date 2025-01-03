@@ -1,134 +1,1103 @@
 <!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<html lang="en" data-content_root="./">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>specifix.segmentation.cli package &mdash; Specifix 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
-    <title>specifix.segmentation.cli package &#8212; Specifix 1.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
-    <script src="_static/documentation_options.js?v=f2a433a1"></script>
-    <script src="_static/doctools.js?v=9a2dae69"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
+    <link rel="next" title="specifix.segmentation.cli.io package" href="specifix.segmentation.cli.io.html" />
+    <link rel="prev" title="specifix.segmentation package" href="specifix.segmentation.html" /> 
+</head>
 
-  
-  
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
 
-  </head><body>
-  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
           
+          
+          <a href="index.html" class="icon icon-home">
+            Specifix
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">specifix</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="specifix.html">specifix package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="specifix.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="specifix.fracture_reduction.html">specifix.fracture_reduction package</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="specifix.segmentation.html">specifix.segmentation package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="specifix.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="specifix.html#module-specifix.cli_test">specifix.cli_test module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="specifix.html#module-specifix.generate_nifti_from_nrrd">specifix.generate_nifti_from_nrrd module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="specifix.html#module-specifix.generate_nifti_from_nrrd_new">specifix.generate_nifti_from_nrrd_new module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="specifix.html#specifix-mesh-generation-module">specifix.mesh_generation module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="specifix.html#module-specifix">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="specifix.fracture_reduction.html">specifix.fracture_reduction package</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="specifix.html">specifix package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="specifix.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="specifix.fracture_reduction.html">specifix.fracture_reduction package</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="specifix.segmentation.html">specifix.segmentation package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="specifix.segmentation.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="specifix.segmentation.html#module-specifix.segmentation">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="specifix.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="specifix.html#module-specifix.cli_test">specifix.cli_test module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="specifix.html#module-specifix.generate_nifti_from_nrrd">specifix.generate_nifti_from_nrrd module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="specifix.html#module-specifix.generate_nifti_from_nrrd_new">specifix.generate_nifti_from_nrrd_new module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="specifix.html#specifix-mesh-generation-module">specifix.mesh_generation module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="specifix.html#module-specifix">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="specifix.segmentation.cli.io.html">specifix.segmentation.cli.io package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">specifix.segmentation.cli package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="specifix.segmentation.cli.io.html">specifix.segmentation.cli.io package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-specifix.segmentation.cli.config">specifix.segmentation.cli.config module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#specifix.segmentation.cli.config.ColorMap"><code class="docutils literal notranslate"><span class="pre">ColorMap</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.ColorMap.BLACK"><code class="docutils literal notranslate"><span class="pre">ColorMap.BLACK</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.ColorMap.BLUE"><code class="docutils literal notranslate"><span class="pre">ColorMap.BLUE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.ColorMap.BROWN"><code class="docutils literal notranslate"><span class="pre">ColorMap.BROWN</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.ColorMap.DARK_GREY"><code class="docutils literal notranslate"><span class="pre">ColorMap.DARK_GREY</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.ColorMap.GRAPE"><code class="docutils literal notranslate"><span class="pre">ColorMap.GRAPE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.ColorMap.GREEN"><code class="docutils literal notranslate"><span class="pre">ColorMap.GREEN</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.ColorMap.GREY"><code class="docutils literal notranslate"><span class="pre">ColorMap.GREY</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.ColorMap.INDIGO"><code class="docutils literal notranslate"><span class="pre">ColorMap.INDIGO</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.ColorMap.LAVENDER"><code class="docutils literal notranslate"><span class="pre">ColorMap.LAVENDER</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.ColorMap.LIGHT_GREEN"><code class="docutils literal notranslate"><span class="pre">ColorMap.LIGHT_GREEN</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.ColorMap.LIGHT_PINK"><code class="docutils literal notranslate"><span class="pre">ColorMap.LIGHT_PINK</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.ColorMap.MAGENTA"><code class="docutils literal notranslate"><span class="pre">ColorMap.MAGENTA</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.ColorMap.ORANGE"><code class="docutils literal notranslate"><span class="pre">ColorMap.ORANGE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.ColorMap.PEACH"><code class="docutils literal notranslate"><span class="pre">ColorMap.PEACH</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.ColorMap.PINK"><code class="docutils literal notranslate"><span class="pre">ColorMap.PINK</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.ColorMap.PURPLE"><code class="docutils literal notranslate"><span class="pre">ColorMap.PURPLE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.ColorMap.RED"><code class="docutils literal notranslate"><span class="pre">ColorMap.RED</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.ColorMap.ROYAL_BLUE"><code class="docutils literal notranslate"><span class="pre">ColorMap.ROYAL_BLUE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.ColorMap.TEAL"><code class="docutils literal notranslate"><span class="pre">ColorMap.TEAL</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.ColorMap.WHITE"><code class="docutils literal notranslate"><span class="pre">ColorMap.WHITE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.ColorMap.YELLOW"><code class="docutils literal notranslate"><span class="pre">ColorMap.YELLOW</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#specifix.segmentation.cli.config.Config"><code class="docutils literal notranslate"><span class="pre">Config</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.Config.COMBINED_DICT"><code class="docutils literal notranslate"><span class="pre">Config.COMBINED_DICT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.Config.COMBINED_LABEL"><code class="docutils literal notranslate"><span class="pre">Config.COMBINED_LABEL</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.Config.DATA_STRUCTURE"><code class="docutils literal notranslate"><span class="pre">Config.DATA_STRUCTURE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.Config.DEFAULT_UNKNOWN"><code class="docutils literal notranslate"><span class="pre">Config.DEFAULT_UNKNOWN</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.Config.IDENTITY_DIRECTION"><code class="docutils literal notranslate"><span class="pre">Config.IDENTITY_DIRECTION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.Config.NIFTI_EXTENSION"><code class="docutils literal notranslate"><span class="pre">Config.NIFTI_EXTENSION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.Config.NRRD_EXTENSION"><code class="docutils literal notranslate"><span class="pre">Config.NRRD_EXTENSION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.Config.NRRD_INNER_DIRECTORY"><code class="docutils literal notranslate"><span class="pre">Config.NRRD_INNER_DIRECTORY</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.Config.NRRD_REGEX_PATTERN"><code class="docutils literal notranslate"><span class="pre">Config.NRRD_REGEX_PATTERN</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.Config.TIFF_EXTENSION"><code class="docutils literal notranslate"><span class="pre">Config.TIFF_EXTENSION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.Config.VISUAL_COMBINED_DICT"><code class="docutils literal notranslate"><span class="pre">Config.VISUAL_COMBINED_DICT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.Config.VISUAL_STRUCTURE"><code class="docutils literal notranslate"><span class="pre">Config.VISUAL_STRUCTURE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.Config.label"><code class="docutils literal notranslate"><span class="pre">Config.label</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#specifix.segmentation.cli.config.Label"><code class="docutils literal notranslate"><span class="pre">Label</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.Label.color"><code class="docutils literal notranslate"><span class="pre">Label.color</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.Label.id"><code class="docutils literal notranslate"><span class="pre">Label.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.Label.label"><code class="docutils literal notranslate"><span class="pre">Label.label</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.Label.to_dict"><code class="docutils literal notranslate"><span class="pre">Label.to_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.Label.variations"><code class="docutils literal notranslate"><span class="pre">Label.variations</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#specifix.segmentation.cli.config.LabelCombined"><code class="docutils literal notranslate"><span class="pre">LabelCombined</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.LabelCombined.color"><code class="docutils literal notranslate"><span class="pre">LabelCombined.color</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.LabelCombined.id"><code class="docutils literal notranslate"><span class="pre">LabelCombined.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.config.LabelCombined.label"><code class="docutils literal notranslate"><span class="pre">LabelCombined.label</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-specifix.segmentation.cli.converter">specifix.segmentation.cli.converter module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#specifix.segmentation.cli.converter.Converter"><code class="docutils literal notranslate"><span class="pre">Converter</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.converter.Converter.copy_metadata_from_array"><code class="docutils literal notranslate"><span class="pre">Converter.copy_metadata_from_array()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.converter.Converter.copy_metadata_from_image"><code class="docutils literal notranslate"><span class="pre">Converter.copy_metadata_from_image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.converter.Converter.get_array_from_image"><code class="docutils literal notranslate"><span class="pre">Converter.get_array_from_image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.converter.Converter.get_image_from_array"><code class="docutils literal notranslate"><span class="pre">Converter.get_image_from_array()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.converter.Converter.preprocess_image"><code class="docutils literal notranslate"><span class="pre">Converter.preprocess_image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.converter.Converter.stack_nrrd"><code class="docutils literal notranslate"><span class="pre">Converter.stack_nrrd()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#specifix.segmentation.cli.converter.Nifti"><code class="docutils literal notranslate"><span class="pre">Nifti</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.converter.Nifti.align"><code class="docutils literal notranslate"><span class="pre">Nifti.align()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.converter.Nifti.align_all"><code class="docutils literal notranslate"><span class="pre">Nifti.align_all()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.converter.Nifti.convert_all"><code class="docutils literal notranslate"><span class="pre">Nifti.convert_all()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.converter.Nifti.to_label_nrrds"><code class="docutils literal notranslate"><span class="pre">Nifti.to_label_nrrds()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.converter.Nifti.to_label_tiffs"><code class="docutils literal notranslate"><span class="pre">Nifti.to_label_tiffs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.converter.Nifti.to_single_label_tiffs"><code class="docutils literal notranslate"><span class="pre">Nifti.to_single_label_tiffs()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-specifix.segmentation.cli.generator">specifix.segmentation.cli.generator module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#specifix.segmentation.cli.generator.DebugEntry"><code class="docutils literal notranslate"><span class="pre">DebugEntry</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.generator.DebugEntry.count"><code class="docutils literal notranslate"><span class="pre">DebugEntry.count</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.generator.DebugEntry.duplicates"><code class="docutils literal notranslate"><span class="pre">DebugEntry.duplicates</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.generator.DebugEntry.unknown"><code class="docutils literal notranslate"><span class="pre">DebugEntry.unknown</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#specifix.segmentation.cli.generator.Generator"><code class="docutils literal notranslate"><span class="pre">Generator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.generator.Generator.append_record"><code class="docutils literal notranslate"><span class="pre">Generator.append_record()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.generator.Generator.clear"><code class="docutils literal notranslate"><span class="pre">Generator.clear()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.generator.Generator.process_all"><code class="docutils literal notranslate"><span class="pre">Generator.process_all()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.generator.Generator.process_single_ct_scan"><code class="docutils literal notranslate"><span class="pre">Generator.process_single_ct_scan()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-specifix.segmentation.cli.mesh">specifix.segmentation.cli.mesh module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#specifix.segmentation.cli.mesh.Mesh"><code class="docutils literal notranslate"><span class="pre">Mesh</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.mesh.Mesh.generate_mesh"><code class="docutils literal notranslate"><span class="pre">Mesh.generate_mesh()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.mesh.Mesh.generate_meshes"><code class="docutils literal notranslate"><span class="pre">Mesh.generate_meshes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.mesh.Mesh.process_image_to_stl"><code class="docutils literal notranslate"><span class="pre">Mesh.process_image_to_stl()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#specifix.segmentation.cli.mesh.Processor"><code class="docutils literal notranslate"><span class="pre">Processor</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.mesh.Processor.apply_advanced_smooting_filter"><code class="docutils literal notranslate"><span class="pre">Processor.apply_advanced_smooting_filter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.mesh.Processor.apply_cleaning"><code class="docutils literal notranslate"><span class="pre">Processor.apply_cleaning()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.mesh.Processor.apply_connectivity_filter"><code class="docutils literal notranslate"><span class="pre">Processor.apply_connectivity_filter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.mesh.Processor.apply_gausian_smooting"><code class="docutils literal notranslate"><span class="pre">Processor.apply_gausian_smooting()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.mesh.Processor.apply_marshing_cubes"><code class="docutils literal notranslate"><span class="pre">Processor.apply_marshing_cubes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.mesh.Processor.apply_subdivision_for_higher_resolution"><code class="docutils literal notranslate"><span class="pre">Processor.apply_subdivision_for_higher_resolution()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-specifix.segmentation.cli.shell">specifix.segmentation.cli.shell module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#specifix.segmentation.cli.shell.Shell"><code class="docutils literal notranslate"><span class="pre">Shell</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.shell.Shell.extract_outer_boundary"><code class="docutils literal notranslate"><span class="pre">Shell.extract_outer_boundary()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.shell.Shell.perform_morphological_closing"><code class="docutils literal notranslate"><span class="pre">Shell.perform_morphological_closing()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.shell.Shell.process_ct_scan"><code class="docutils literal notranslate"><span class="pre">Shell.process_ct_scan()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.shell.Shell.process_single_mask"><code class="docutils literal notranslate"><span class="pre">Shell.process_single_mask()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.shell.Shell.remove_inner_artifacts"><code class="docutils literal notranslate"><span class="pre">Shell.remove_inner_artifacts()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifix.segmentation.cli.shell.Shell.thicken_boundary"><code class="docutils literal notranslate"><span class="pre">Shell.thicken_boundary()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-specifix.segmentation.cli">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="specifix.segmentation.html">specifix.segmentation package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="specifix.segmentation.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">specifix.segmentation.cli package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-specifix.segmentation.cli.config">specifix.segmentation.cli.config module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-specifix.segmentation.cli.converter">specifix.segmentation.cli.converter module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-specifix.segmentation.cli.generator">specifix.segmentation.cli.generator module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-specifix.segmentation.cli.mesh">specifix.segmentation.cli.mesh module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-specifix.segmentation.cli.shell">specifix.segmentation.cli.shell module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-specifix.segmentation.cli">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="specifix.segmentation.html#module-specifix.segmentation">Module contents</a></li>
+</ul>
+</li>
+</ul>
 
-          <div class="body" role="main">
-            
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Specifix</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">specifix</a></li>
+          <li class="breadcrumb-item"><a href="specifix.html">specifix package</a></li>
+          <li class="breadcrumb-item"><a href="specifix.segmentation.html">specifix.segmentation package</a></li>
+      <li class="breadcrumb-item active">specifix.segmentation.cli package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/specifix.segmentation.cli.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <section id="specifix-segmentation-cli-package">
-<h1>specifix.segmentation.cli package<a class="headerlink" href="#specifix-segmentation-cli-package" title="Link to this heading">¶</a></h1>
+<h1>specifix.segmentation.cli package<a class="headerlink" href="#specifix-segmentation-cli-package" title="Link to this heading"></a></h1>
 <section id="subpackages">
-<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading">¶</a></h2>
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="specifix.segmentation.cli.io.html">specifix.segmentation.cli.io package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="specifix.segmentation.cli.io.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="specifix.segmentation.cli.io.html#specifix-segmentation-cli-io-calback-module">specifix.segmentation.cli.io.calback module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="specifix.segmentation.cli.io.html#module-contents">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="specifix.segmentation.cli.io.html#module-specifix.segmentation.cli.io.calback">specifix.segmentation.cli.io.calback module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.calback.reset_input_callback"><code class="docutils literal notranslate"><span class="pre">reset_input_callback()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.calback.reset_output_callback"><code class="docutils literal notranslate"><span class="pre">reset_output_callback()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="specifix.segmentation.cli.io.html#module-specifix.segmentation.cli.io">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.BoneIOFileManager"><code class="docutils literal notranslate"><span class="pre">BoneIOFileManager</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.BoneIOFileManager.build"><code class="docutils literal notranslate"><span class="pre">BoneIOFileManager.build()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.BoneIOFileManager.read_all"><code class="docutils literal notranslate"><span class="pre">BoneIOFileManager.read_all()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.BoneIOFileManager.read_file"><code class="docutils literal notranslate"><span class="pre">BoneIOFileManager.read_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.BoneIOFileManager.save_file"><code class="docutils literal notranslate"><span class="pre">BoneIOFileManager.save_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.BoneIOFileManager.set_inner_folder"><code class="docutils literal notranslate"><span class="pre">BoneIOFileManager.set_inner_folder()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.BoneIOFileManager.set_output_folder"><code class="docutils literal notranslate"><span class="pre">BoneIOFileManager.set_output_folder()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.BoneIOFileManager.set_output_relative_to_input_dir"><code class="docutils literal notranslate"><span class="pre">BoneIOFileManager.set_output_relative_to_input_dir()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.IOManager"><code class="docutils literal notranslate"><span class="pre">IOManager</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.IOManager.read_all"><code class="docutils literal notranslate"><span class="pre">IOManager.read_all()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.IOManager.read_file"><code class="docutils literal notranslate"><span class="pre">IOManager.read_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.IOManager.save_file"><code class="docutils literal notranslate"><span class="pre">IOManager.save_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.IOManager.set_inner_folder"><code class="docutils literal notranslate"><span class="pre">IOManager.set_inner_folder()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.IOManager.set_output_folder"><code class="docutils literal notranslate"><span class="pre">IOManager.set_output_folder()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.IOManager.set_output_relative_to_input_dir"><code class="docutils literal notranslate"><span class="pre">IOManager.set_output_relative_to_input_dir()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </div>
 </section>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
 </section>
-<section id="specifix-segmentation-cli-config-module">
-<h2>specifix.segmentation.cli.config module<a class="headerlink" href="#specifix-segmentation-cli-config-module" title="Link to this heading">¶</a></h2>
+<section id="module-specifix.segmentation.cli.config">
+<span id="specifix-segmentation-cli-config-module"></span><h2>specifix.segmentation.cli.config module<a class="headerlink" href="#module-specifix.segmentation.cli.config" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.ColorMap">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">specifix.segmentation.cli.config.</span></span><span class="sig-name descname"><span class="pre">ColorMap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/config.html#ColorMap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.config.ColorMap" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.ColorMap.BLACK">
+<span class="sig-name descname"><span class="pre">BLACK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#000000'</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.ColorMap.BLACK" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.ColorMap.BLUE">
+<span class="sig-name descname"><span class="pre">BLUE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#9FFCFD'</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.ColorMap.BLUE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.ColorMap.BROWN">
+<span class="sig-name descname"><span class="pre">BROWN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#784315'</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.ColorMap.BROWN" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.ColorMap.DARK_GREY">
+<span class="sig-name descname"><span class="pre">DARK_GREY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#808080'</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.ColorMap.DARK_GREY" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.ColorMap.GRAPE">
+<span class="sig-name descname"><span class="pre">GRAPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#604F9C'</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.ColorMap.GRAPE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.ColorMap.GREEN">
+<span class="sig-name descname"><span class="pre">GREEN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#377D22'</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.ColorMap.GREEN" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.ColorMap.GREY">
+<span class="sig-name descname"><span class="pre">GREY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#C0C0C0'</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.ColorMap.GREY" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.ColorMap.INDIGO">
+<span class="sig-name descname"><span class="pre">INDIGO</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#615F84'</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.ColorMap.INDIGO" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.ColorMap.LAVENDER">
+<span class="sig-name descname"><span class="pre">LAVENDER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#C2A5CC'</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.ColorMap.LAVENDER" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.ColorMap.LIGHT_GREEN">
+<span class="sig-name descname"><span class="pre">LIGHT_GREEN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#91C67B'</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.ColorMap.LIGHT_GREEN" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.ColorMap.LIGHT_PINK">
+<span class="sig-name descname"><span class="pre">LIGHT_PINK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#F5B3C0'</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.ColorMap.LIGHT_PINK" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.ColorMap.MAGENTA">
+<span class="sig-name descname"><span class="pre">MAGENTA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#D1115B'</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.ColorMap.MAGENTA" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.ColorMap.ORANGE">
+<span class="sig-name descname"><span class="pre">ORANGE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#F08650'</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.ColorMap.ORANGE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.ColorMap.PEACH">
+<span class="sig-name descname"><span class="pre">PEACH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#F8BE9F'</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.ColorMap.PEACH" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.ColorMap.PINK">
+<span class="sig-name descname"><span class="pre">PINK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#EF88BE'</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.ColorMap.PINK" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.ColorMap.PURPLE">
+<span class="sig-name descname"><span class="pre">PURPLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#741B7C'</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.ColorMap.PURPLE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.ColorMap.RED">
+<span class="sig-name descname"><span class="pre">RED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#EB3324'</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.ColorMap.RED" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.ColorMap.ROYAL_BLUE">
+<span class="sig-name descname"><span class="pre">ROYAL_BLUE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#252958'</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.ColorMap.ROYAL_BLUE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.ColorMap.TEAL">
+<span class="sig-name descname"><span class="pre">TEAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#176079'</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.ColorMap.TEAL" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.ColorMap.WHITE">
+<span class="sig-name descname"><span class="pre">WHITE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#FFFFFF'</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.ColorMap.WHITE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.ColorMap.YELLOW">
+<span class="sig-name descname"><span class="pre">YELLOW</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#FFFE91'</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.ColorMap.YELLOW" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.Config">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">specifix.segmentation.cli.config.</span></span><span class="sig-name descname"><span class="pre">Config</span></span><a class="reference internal" href="_modules/specifix/segmentation/cli/config.html#Config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.config.Config" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.Config.COMBINED_DICT">
+<span class="sig-name descname"><span class="pre">COMBINED_DICT</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#specifix.segmentation.cli.config.LabelCombined" title="specifix.segmentation.cli.config.LabelCombined"><span class="pre">LabelCombined</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'DR.nrrd':</span> <span class="pre">LabelCombined(id=2,</span> <span class="pre">label='dDR',</span> <span class="pre">color=&lt;ColorMap.PEACH:</span> <span class="pre">'#F8BE9F'&gt;),</span> <span class="pre">'DU.nrrd':</span> <span class="pre">LabelCombined(id=4,</span> <span class="pre">label='dDU',</span> <span class="pre">color=&lt;ColorMap.ORANGE:</span> <span class="pre">'#F08650'&gt;),</span> <span class="pre">'L.nrrd':</span> <span class="pre">LabelCombined(id=11,</span> <span class="pre">label='L',</span> <span class="pre">color=&lt;ColorMap.GRAPE:</span> <span class="pre">'#604F9C'&gt;),</span> <span class="pre">'M0.nrrd':</span> <span class="pre">LabelCombined(id=17,</span> <span class="pre">label='M',</span> <span class="pre">color=&lt;ColorMap.GREY:</span> <span class="pre">'#C0C0C0'&gt;),</span> <span class="pre">'M1.nrrd':</span> <span class="pre">LabelCombined(id=17,</span> <span class="pre">label='M',</span> <span class="pre">color=&lt;ColorMap.GREY:</span> <span class="pre">'#C0C0C0'&gt;),</span> <span class="pre">'P1DU1.nrrd':</span> <span class="pre">LabelCombined(id=12,</span> <span class="pre">label='p1DU1',</span> <span class="pre">color=&lt;ColorMap.ROYAL_BLUE:</span> <span class="pre">'#252958'&gt;),</span> <span class="pre">'PDR.nrrd':</span> <span class="pre">LabelCombined(id=9,</span> <span class="pre">label='p1DR1',</span> <span class="pre">color=&lt;ColorMap.LAVENDER:</span> <span class="pre">'#C2A5CC'&gt;),</span> <span class="pre">'R.nrrd':</span> <span class="pre">LabelCombined(id=1,</span> <span class="pre">label='dR',</span> <span class="pre">color=&lt;ColorMap.LIGHT_GREEN:</span> <span class="pre">'#91C67B'&gt;),</span> <span class="pre">'VR.nrrd':</span> <span class="pre">LabelCombined(id=7,</span> <span class="pre">label='dVR',</span> <span class="pre">color=&lt;ColorMap.BROWN:</span> <span class="pre">'#784315'&gt;),</span> <span class="pre">'VU.nrrd':</span> <span class="pre">LabelCombined(id=6,</span> <span class="pre">label='dVU',</span> <span class="pre">color=&lt;ColorMap.INDIGO:</span> <span class="pre">'#615F84'&gt;),</span> <span class="pre">'dC.nrrd':</span> <span class="pre">LabelCombined(id=8,</span> <span class="pre">label='dRest',</span> <span class="pre">color=&lt;ColorMap.PINK:</span> <span class="pre">'#EF88BE'&gt;),</span> <span class="pre">'dD.nrrd':</span> <span class="pre">LabelCombined(id=3,</span> <span class="pre">label='dDC',</span> <span class="pre">color=&lt;ColorMap.BLUE:</span> <span class="pre">'#9FFCFD'&gt;),</span> <span class="pre">'dDC.nrrd':</span> <span class="pre">LabelCombined(id=3,</span> <span class="pre">label='dDC',</span> <span class="pre">color=&lt;ColorMap.BLUE:</span> <span class="pre">'#9FFCFD'&gt;),</span> <span class="pre">'dDR.nrrd':</span> <span class="pre">LabelCombined(id=2,</span> <span class="pre">label='dDR',</span> <span class="pre">color=&lt;ColorMap.PEACH:</span> <span class="pre">'#F8BE9F'&gt;),</span> <span class="pre">'dDRU.nrrd':</span> <span class="pre">LabelCombined(id=3,</span> <span class="pre">label='dDC',</span> <span class="pre">color=&lt;ColorMap.BLUE:</span> <span class="pre">'#9FFCFD'&gt;),</span> <span class="pre">'dDU.nrrd':</span> <span class="pre">LabelCombined(id=4,</span> <span class="pre">label='dDU',</span> <span class="pre">color=&lt;ColorMap.ORANGE:</span> <span class="pre">'#F08650'&gt;),</span> <span class="pre">'dDU1.nrrd':</span> <span class="pre">LabelCombined(id=4,</span> <span class="pre">label='dDU',</span> <span class="pre">color=&lt;ColorMap.ORANGE:</span> <span class="pre">'#F08650'&gt;),</span> <span class="pre">'dDU2.nrrd':</span> <span class="pre">LabelCombined(id=5,</span> <span class="pre">label='dU',</span> <span class="pre">color=&lt;ColorMap.MAGENTA:</span> <span class="pre">'#D1115B'&gt;),</span> <span class="pre">'dINTACT.nrrd':</span> <span class="pre">LabelCombined(id=8,</span> <span class="pre">label='dRest',</span> <span class="pre">color=&lt;ColorMap.PINK:</span> <span class="pre">'#EF88BE'&gt;),</span> <span class="pre">'dIntact.nrrd':</span> <span class="pre">LabelCombined(id=8,</span> <span class="pre">label='dRest',</span> <span class="pre">color=&lt;ColorMap.PINK:</span> <span class="pre">'#EF88BE'&gt;),</span> <span class="pre">'dL.nrrd':</span> <span class="pre">LabelCombined(id=3,</span> <span class="pre">label='dDC',</span> <span class="pre">color=&lt;ColorMap.BLUE:</span> <span class="pre">'#9FFCFD'&gt;),</span> <span class="pre">'dLU.nrrd':</span> <span class="pre">LabelCombined(id=4,</span> <span class="pre">label='dDU',</span> <span class="pre">color=&lt;ColorMap.ORANGE:</span> <span class="pre">'#F08650'&gt;),</span> <span class="pre">'dR-U.nrrd':</span> <span class="pre">LabelCombined(id=8,</span> <span class="pre">label='dRest',</span> <span class="pre">color=&lt;ColorMap.PINK:</span> <span class="pre">'#EF88BE'&gt;),</span> <span class="pre">'dR.nrrd':</span> <span class="pre">LabelCombined(id=1,</span> <span class="pre">label='dR',</span> <span class="pre">color=&lt;ColorMap.LIGHT_GREEN:</span> <span class="pre">'#91C67B'&gt;),</span> <span class="pre">'dRU</span> <span class="pre">cli.nrrd':</span> <span class="pre">LabelCombined(id=8,</span> <span class="pre">label='dRest',</span> <span class="pre">color=&lt;ColorMap.PINK:</span> <span class="pre">'#EF88BE'&gt;),</span> <span class="pre">'dRU.nrrd':</span> <span class="pre">LabelCombined(id=8,</span> <span class="pre">label='dRest',</span> <span class="pre">color=&lt;ColorMap.PINK:</span> <span class="pre">'#EF88BE'&gt;),</span> <span class="pre">'dU.nrrd':</span> <span class="pre">LabelCombined(id=5,</span> <span class="pre">label='dU',</span> <span class="pre">color=&lt;ColorMap.MAGENTA:</span> <span class="pre">'#D1115B'&gt;),</span> <span class="pre">'dV.nrrd':</span> <span class="pre">LabelCombined(id=8,</span> <span class="pre">label='dRest',</span> <span class="pre">color=&lt;ColorMap.PINK:</span> <span class="pre">'#EF88BE'&gt;),</span> <span class="pre">'dVC.nrrd':</span> <span class="pre">LabelCombined(id=8,</span> <span class="pre">label='dRest',</span> <span class="pre">color=&lt;ColorMap.PINK:</span> <span class="pre">'#EF88BE'&gt;),</span> <span class="pre">'dVR.nrrd':</span> <span class="pre">LabelCombined(id=7,</span> <span class="pre">label='dVR',</span> <span class="pre">color=&lt;ColorMap.BROWN:</span> <span class="pre">'#784315'&gt;),</span> <span class="pre">'dVRU.nrrd':</span> <span class="pre">LabelCombined(id=7,</span> <span class="pre">label='dVR',</span> <span class="pre">color=&lt;ColorMap.BROWN:</span> <span class="pre">'#784315'&gt;),</span> <span class="pre">'dVU.nrrd':</span> <span class="pre">LabelCombined(id=6,</span> <span class="pre">label='dVU',</span> <span class="pre">color=&lt;ColorMap.INDIGO:</span> <span class="pre">'#615F84'&gt;),</span> <span class="pre">'p1DR</span> <span class="pre">fin.nrrd':</span> <span class="pre">LabelCombined(id=9,</span> <span class="pre">label='p1DR1',</span> <span class="pre">color=&lt;ColorMap.LAVENDER:</span> <span class="pre">'#C2A5CC'&gt;),</span> <span class="pre">'p1DR.nrrd':</span> <span class="pre">LabelCombined(id=9,</span> <span class="pre">label='p1DR1',</span> <span class="pre">color=&lt;ColorMap.LAVENDER:</span> <span class="pre">'#C2A5CC'&gt;),</span> <span class="pre">'p1DR1.nrrd':</span> <span class="pre">LabelCombined(id=9,</span> <span class="pre">label='p1DR1',</span> <span class="pre">color=&lt;ColorMap.LAVENDER:</span> <span class="pre">'#C2A5CC'&gt;),</span> <span class="pre">'p1DR2.nrrd':</span> <span class="pre">LabelCombined(id=10,</span> <span class="pre">label='p1DR2',</span> <span class="pre">color=&lt;ColorMap.TEAL:</span> <span class="pre">'#176079'&gt;),</span> <span class="pre">'p1DR3.nrrd':</span> <span class="pre">LabelCombined(id=11,</span> <span class="pre">label='L',</span> <span class="pre">color=&lt;ColorMap.GRAPE:</span> <span class="pre">'#604F9C'&gt;),</span> <span class="pre">'p1DU.nrrd':</span> <span class="pre">LabelCombined(id=12,</span> <span class="pre">label='p1DU1',</span> <span class="pre">color=&lt;ColorMap.ROYAL_BLUE:</span> <span class="pre">'#252958'&gt;),</span> <span class="pre">'p1DU1.nrrd':</span> <span class="pre">LabelCombined(id=12,</span> <span class="pre">label='p1DU1',</span> <span class="pre">color=&lt;ColorMap.ROYAL_BLUE:</span> <span class="pre">'#252958'&gt;),</span> <span class="pre">'p1DU2.nrrd':</span> <span class="pre">LabelCombined(id=14,</span> <span class="pre">label='p1DU2',</span> <span class="pre">color=&lt;ColorMap.YELLOW:</span> <span class="pre">'#FFFE91'&gt;),</span> <span class="pre">'p1L.nrrd':</span> <span class="pre">LabelCombined(id=11,</span> <span class="pre">label='L',</span> <span class="pre">color=&lt;ColorMap.GRAPE:</span> <span class="pre">'#604F9C'&gt;),</span> <span class="pre">'p1VR.nrrd':</span> <span class="pre">LabelCombined(id=15,</span> <span class="pre">label='p1VR1',</span> <span class="pre">color=&lt;ColorMap.GREEN:</span> <span class="pre">'#377D22'&gt;),</span> <span class="pre">'p1VR1.nrrd':</span> <span class="pre">LabelCombined(id=15,</span> <span class="pre">label='p1VR1',</span> <span class="pre">color=&lt;ColorMap.GREEN:</span> <span class="pre">'#377D22'&gt;),</span> <span class="pre">'p1VR2.nrrd':</span> <span class="pre">LabelCombined(id=16,</span> <span class="pre">label='p1VR2',</span> <span class="pre">color=&lt;ColorMap.RED:</span> <span class="pre">'#EB3324'&gt;),</span> <span class="pre">'p1VU1.nrrd':</span> <span class="pre">LabelCombined(id=13,</span> <span class="pre">label='p1VU1',</span> <span class="pre">color=&lt;ColorMap.PURPLE:</span> <span class="pre">'#741B7C'&gt;),</span> <span class="pre">'p1VU2.nrrd':</span> <span class="pre">LabelCombined(id=14,</span> <span class="pre">label='p1DU2',</span> <span class="pre">color=&lt;ColorMap.YELLOW:</span> <span class="pre">'#FFFE91'&gt;),</span> <span class="pre">'p2DR.nrrd':</span> <span class="pre">LabelCombined(id=7,</span> <span class="pre">label='dVR',</span> <span class="pre">color=&lt;ColorMap.BROWN:</span> <span class="pre">'#784315'&gt;),</span> <span class="pre">'p2DR1.nrrd':</span> <span class="pre">LabelCombined(id=7,</span> <span class="pre">label='dVR',</span> <span class="pre">color=&lt;ColorMap.BROWN:</span> <span class="pre">'#784315'&gt;),</span> <span class="pre">'p2DR2.nrrd':</span> <span class="pre">LabelCombined(id=1,</span> <span class="pre">label='dR',</span> <span class="pre">color=&lt;ColorMap.LIGHT_GREEN:</span> <span class="pre">'#91C67B'&gt;),</span> <span class="pre">'p2DU.nrrd':</span> <span class="pre">LabelCombined(id=2,</span> <span class="pre">label='dDR',</span> <span class="pre">color=&lt;ColorMap.PEACH:</span> <span class="pre">'#F8BE9F'&gt;),</span> <span class="pre">'p2DU1.nrrd':</span> <span class="pre">LabelCombined(id=2,</span> <span class="pre">label='dDR',</span> <span class="pre">color=&lt;ColorMap.PEACH:</span> <span class="pre">'#F8BE9F'&gt;),</span> <span class="pre">'p2DU2.nrrd':</span> <span class="pre">LabelCombined(id=5,</span> <span class="pre">label='dU',</span> <span class="pre">color=&lt;ColorMap.MAGENTA:</span> <span class="pre">'#D1115B'&gt;),</span> <span class="pre">'p2L.nrrd':</span> <span class="pre">LabelCombined(id=11,</span> <span class="pre">label='L',</span> <span class="pre">color=&lt;ColorMap.GRAPE:</span> <span class="pre">'#604F9C'&gt;),</span> <span class="pre">'p2VR.nrrd':</span> <span class="pre">LabelCombined(id=10,</span> <span class="pre">label='p1DR2',</span> <span class="pre">color=&lt;ColorMap.TEAL:</span> <span class="pre">'#176079'&gt;),</span> <span class="pre">'p2VR1.nrrd':</span> <span class="pre">LabelCombined(id=10,</span> <span class="pre">label='p1DR2',</span> <span class="pre">color=&lt;ColorMap.TEAL:</span> <span class="pre">'#176079'&gt;),</span> <span class="pre">'pDC.nrrd':</span> <span class="pre">LabelCombined(id=11,</span> <span class="pre">label='L',</span> <span class="pre">color=&lt;ColorMap.GRAPE:</span> <span class="pre">'#604F9C'&gt;),</span> <span class="pre">'pDR.nrrd':</span> <span class="pre">LabelCombined(id=9,</span> <span class="pre">label='p1DR1',</span> <span class="pre">color=&lt;ColorMap.LAVENDER:</span> <span class="pre">'#C2A5CC'&gt;),</span> <span class="pre">'pDR1.nrrd':</span> <span class="pre">LabelCombined(id=9,</span> <span class="pre">label='p1DR1',</span> <span class="pre">color=&lt;ColorMap.LAVENDER:</span> <span class="pre">'#C2A5CC'&gt;),</span> <span class="pre">'pDR2.nrrd':</span> <span class="pre">LabelCombined(id=10,</span> <span class="pre">label='p1DR2',</span> <span class="pre">color=&lt;ColorMap.TEAL:</span> <span class="pre">'#176079'&gt;),</span> <span class="pre">'pDR3.nrrd':</span> <span class="pre">LabelCombined(id=11,</span> <span class="pre">label='L',</span> <span class="pre">color=&lt;ColorMap.GRAPE:</span> <span class="pre">'#604F9C'&gt;),</span> <span class="pre">'pDU.nrrd':</span> <span class="pre">LabelCombined(id=12,</span> <span class="pre">label='p1DU1',</span> <span class="pre">color=&lt;ColorMap.ROYAL_BLUE:</span> <span class="pre">'#252958'&gt;),</span> <span class="pre">'pDU1.nrrd':</span> <span class="pre">LabelCombined(id=12,</span> <span class="pre">label='p1DU1',</span> <span class="pre">color=&lt;ColorMap.ROYAL_BLUE:</span> <span class="pre">'#252958'&gt;),</span> <span class="pre">'pDU2.nrrd':</span> <span class="pre">LabelCombined(id=14,</span> <span class="pre">label='p1DU2',</span> <span class="pre">color=&lt;ColorMap.YELLOW:</span> <span class="pre">'#FFFE91'&gt;),</span> <span class="pre">'pU.nrrd':</span> <span class="pre">LabelCombined(id=16,</span> <span class="pre">label='p1VR2',</span> <span class="pre">color=&lt;ColorMap.RED:</span> <span class="pre">'#EB3324'&gt;),</span> <span class="pre">'pV.nrrd':</span> <span class="pre">LabelCombined(id=16,</span> <span class="pre">label='p1VR2',</span> <span class="pre">color=&lt;ColorMap.RED:</span> <span class="pre">'#EB3324'&gt;),</span> <span class="pre">'pVR</span> <span class="pre">cli.nrrd':</span> <span class="pre">LabelCombined(id=15,</span> <span class="pre">label='p1VR1',</span> <span class="pre">color=&lt;ColorMap.GREEN:</span> <span class="pre">'#377D22'&gt;),</span> <span class="pre">'pVR.nrrd':</span> <span class="pre">LabelCombined(id=15,</span> <span class="pre">label='p1VR1',</span> <span class="pre">color=&lt;ColorMap.GREEN:</span> <span class="pre">'#377D22'&gt;),</span> <span class="pre">'pVR1.nrrd':</span> <span class="pre">LabelCombined(id=15,</span> <span class="pre">label='p1VR1',</span> <span class="pre">color=&lt;ColorMap.GREEN:</span> <span class="pre">'#377D22'&gt;),</span> <span class="pre">'pVR2.nrrd':</span> <span class="pre">LabelCombined(id=16,</span> <span class="pre">label='p1VR2',</span> <span class="pre">color=&lt;ColorMap.RED:</span> <span class="pre">'#EB3324'&gt;),</span> <span class="pre">'pVU</span> <span class="pre">cli.nrrd':</span> <span class="pre">LabelCombined(id=13,</span> <span class="pre">label='p1VU1',</span> <span class="pre">color=&lt;ColorMap.PURPLE:</span> <span class="pre">'#741B7C'&gt;),</span> <span class="pre">'pVU.nrrd':</span> <span class="pre">LabelCombined(id=13,</span> <span class="pre">label='p1VU1',</span> <span class="pre">color=&lt;ColorMap.PURPLE:</span> <span class="pre">'#741B7C'&gt;),</span> <span class="pre">'pVU1.nrrd':</span> <span class="pre">LabelCombined(id=13,</span> <span class="pre">label='p1VU1',</span> <span class="pre">color=&lt;ColorMap.PURPLE:</span> <span class="pre">'#741B7C'&gt;),</span> <span class="pre">'pVU2.nrrd':</span> <span class="pre">LabelCombined(id=9,</span> <span class="pre">label='p1DR1',</span> <span class="pre">color=&lt;ColorMap.LAVENDER:</span> <span class="pre">'#C2A5CC'&gt;),</span> <span class="pre">'unknown.nrrd':</span> <span class="pre">LabelCombined(id=18,</span> <span class="pre">label='unknown',</span> <span class="pre">color=&lt;ColorMap.WHITE:</span> <span class="pre">'#FFFFFF'&gt;)}</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.Config.COMBINED_DICT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.Config.COMBINED_LABEL">
+<span class="sig-name descname"><span class="pre">COMBINED_LABEL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'combined'</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.Config.COMBINED_LABEL" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.Config.DATA_STRUCTURE">
+<span class="sig-name descname"><span class="pre">DATA_STRUCTURE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[Label(id=1,</span> <span class="pre">label='dR',</span> <span class="pre">color=&lt;ColorMap.LIGHT_GREEN:</span> <span class="pre">'#91C67B'&gt;,</span> <span class="pre">variations=['dR',</span> <span class="pre">'p2DR2',</span> <span class="pre">'R']),</span> <span class="pre">Label(id=2,</span> <span class="pre">label='dDR',</span> <span class="pre">color=&lt;ColorMap.PEACH:</span> <span class="pre">'#F8BE9F'&gt;,</span> <span class="pre">variations=['dDR',</span> <span class="pre">'p2DU1',</span> <span class="pre">'DR',</span> <span class="pre">'p2DU']),</span> <span class="pre">Label(id=3,</span> <span class="pre">label='dDC',</span> <span class="pre">color=&lt;ColorMap.BLUE:</span> <span class="pre">'#9FFCFD'&gt;,</span> <span class="pre">variations=['dDC',</span> <span class="pre">'dDRU',</span> <span class="pre">'dL',</span> <span class="pre">'dD']),</span> <span class="pre">Label(id=4,</span> <span class="pre">label='dDU',</span> <span class="pre">color=&lt;ColorMap.ORANGE:</span> <span class="pre">'#F08650'&gt;,</span> <span class="pre">variations=['dDU1',</span> <span class="pre">'dDU',</span> <span class="pre">'DU',</span> <span class="pre">'dLU']),</span> <span class="pre">Label(id=5,</span> <span class="pre">label='dU',</span> <span class="pre">color=&lt;ColorMap.MAGENTA:</span> <span class="pre">'#D1115B'&gt;,</span> <span class="pre">variations=['dU',</span> <span class="pre">'dDU2',</span> <span class="pre">'p2DU2']),</span> <span class="pre">Label(id=6,</span> <span class="pre">label='dVU',</span> <span class="pre">color=&lt;ColorMap.INDIGO:</span> <span class="pre">'#615F84'&gt;,</span> <span class="pre">variations=['dVU',</span> <span class="pre">'VU',</span> <span class="pre">'dVRU']),</span> <span class="pre">Label(id=7,</span> <span class="pre">label='dVR',</span> <span class="pre">color=&lt;ColorMap.BROWN:</span> <span class="pre">'#784315'&gt;,</span> <span class="pre">variations=['dVR',</span> <span class="pre">'dVRU',</span> <span class="pre">'p2DR1',</span> <span class="pre">'VR',</span> <span class="pre">'p2DR']),</span> <span class="pre">Label(id=8,</span> <span class="pre">label='dRest',</span> <span class="pre">color=&lt;ColorMap.PINK:</span> <span class="pre">'#EF88BE'&gt;,</span> <span class="pre">variations=['dC',</span> <span class="pre">'dVC',</span> <span class="pre">'dIntact',</span> <span class="pre">'dINTACT',</span> <span class="pre">'dV',</span> <span class="pre">'dR-U',</span> <span class="pre">'dRU',</span> <span class="pre">'dRU</span> <span class="pre">cli']),</span> <span class="pre">Label(id=9,</span> <span class="pre">label='p1DR1',</span> <span class="pre">color=&lt;ColorMap.LAVENDER:</span> <span class="pre">'#C2A5CC'&gt;,</span> <span class="pre">variations=['p1DR1',</span> <span class="pre">'p1VU2',</span> <span class="pre">'PDR',</span> <span class="pre">'p1DR',</span> <span class="pre">'p1DR</span> <span class="pre">fin',</span> <span class="pre">'pDR',</span> <span class="pre">'pDR1',</span> <span class="pre">'pVU2']),</span> <span class="pre">Label(id=10,</span> <span class="pre">label='p1DR2',</span> <span class="pre">color=&lt;ColorMap.TEAL:</span> <span class="pre">'#176079'&gt;,</span> <span class="pre">variations=['p1DR2',</span> <span class="pre">'p2VR1',</span> <span class="pre">'pDR2',</span> <span class="pre">'p2VR']),</span> <span class="pre">Label(id=11,</span> <span class="pre">label='L',</span> <span class="pre">color=&lt;ColorMap.GRAPE:</span> <span class="pre">'#604F9C'&gt;,</span> <span class="pre">variations=['L',</span> <span class="pre">'p1DR3',</span> <span class="pre">'p1L',</span> <span class="pre">'p2L',</span> <span class="pre">'pDC',</span> <span class="pre">'pDR3']),</span> <span class="pre">Label(id=12,</span> <span class="pre">label='p1DU1',</span> <span class="pre">color=&lt;ColorMap.ROYAL_BLUE:</span> <span class="pre">'#252958'&gt;,</span> <span class="pre">variations=['p1DU1',</span> <span class="pre">'p1DU',</span> <span class="pre">'P1DU1',</span> <span class="pre">'pDU',</span> <span class="pre">'pDU1']),</span> <span class="pre">Label(id=13,</span> <span class="pre">label='p1VU1',</span> <span class="pre">color=&lt;ColorMap.PURPLE:</span> <span class="pre">'#741B7C'&gt;,</span> <span class="pre">variations=['p1VU1',</span> <span class="pre">'pVU',</span> <span class="pre">'pVU</span> <span class="pre">cli',</span> <span class="pre">'pVU1']),</span> <span class="pre">Label(id=14,</span> <span class="pre">label='p1DU2',</span> <span class="pre">color=&lt;ColorMap.YELLOW:</span> <span class="pre">'#FFFE91'&gt;,</span> <span class="pre">variations=['p1DU2',</span> <span class="pre">'p1VU2',</span> <span class="pre">'p1VR2',</span> <span class="pre">'pDU2']),</span> <span class="pre">Label(id=15,</span> <span class="pre">label='p1VR1',</span> <span class="pre">color=&lt;ColorMap.GREEN:</span> <span class="pre">'#377D22'&gt;,</span> <span class="pre">variations=['p1VR1',</span> <span class="pre">'p1VR',</span> <span class="pre">'pVR1',</span> <span class="pre">'pVR',</span> <span class="pre">'pVR</span> <span class="pre">cli']),</span> <span class="pre">Label(id=16,</span> <span class="pre">label='p1VR2',</span> <span class="pre">color=&lt;ColorMap.RED:</span> <span class="pre">'#EB3324'&gt;,</span> <span class="pre">variations=['p1VR2',</span> <span class="pre">'pU',</span> <span class="pre">'pV',</span> <span class="pre">'pVR2']),</span> <span class="pre">Label(id=17,</span> <span class="pre">label='M',</span> <span class="pre">color=&lt;ColorMap.GREY:</span> <span class="pre">'#C0C0C0'&gt;,</span> <span class="pre">variations=['M1',</span> <span class="pre">'M0']),</span> <span class="pre">Label(id=18,</span> <span class="pre">label='unknown',</span> <span class="pre">color=&lt;ColorMap.WHITE:</span> <span class="pre">'#FFFFFF'&gt;,</span> <span class="pre">variations=['unknown'])]</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.Config.DATA_STRUCTURE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.Config.DEFAULT_UNKNOWN">
+<span class="sig-name descname"><span class="pre">DEFAULT_UNKNOWN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'unknown'</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.Config.DEFAULT_UNKNOWN" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.Config.IDENTITY_DIRECTION">
+<span class="sig-name descname"><span class="pre">IDENTITY_DIRECTION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(1.0,</span> <span class="pre">0.0,</span> <span class="pre">0.0,</span> <span class="pre">0.0,</span> <span class="pre">1.0,</span> <span class="pre">0.0,</span> <span class="pre">0.0,</span> <span class="pre">0.0,</span> <span class="pre">1.0)</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.Config.IDENTITY_DIRECTION" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.Config.NIFTI_EXTENSION">
+<span class="sig-name descname"><span class="pre">NIFTI_EXTENSION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'.nii.gz'</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.Config.NIFTI_EXTENSION" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.Config.NRRD_EXTENSION">
+<span class="sig-name descname"><span class="pre">NRRD_EXTENSION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'.nrrd'</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.Config.NRRD_EXTENSION" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.Config.NRRD_INNER_DIRECTORY">
+<span class="sig-name descname"><span class="pre">NRRD_INNER_DIRECTORY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'nrrd'</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.Config.NRRD_INNER_DIRECTORY" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.Config.NRRD_REGEX_PATTERN">
+<span class="sig-name descname"><span class="pre">NRRD_REGEX_PATTERN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\\b(fin|cli|-)\\b'</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.Config.NRRD_REGEX_PATTERN" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.Config.TIFF_EXTENSION">
+<span class="sig-name descname"><span class="pre">TIFF_EXTENSION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'.tiff'</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.Config.TIFF_EXTENSION" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.Config.VISUAL_COMBINED_DICT">
+<span class="sig-name descname"><span class="pre">VISUAL_COMBINED_DICT</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#specifix.segmentation.cli.config.LabelCombined" title="specifix.segmentation.cli.config.LabelCombined"><span class="pre">LabelCombined</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'DR.nrrd':</span> <span class="pre">LabelCombined(id=2,</span> <span class="pre">label='dDR',</span> <span class="pre">color=&lt;ColorMap.PEACH:</span> <span class="pre">'#F8BE9F'&gt;),</span> <span class="pre">'DU.nrrd':</span> <span class="pre">LabelCombined(id=4,</span> <span class="pre">label='dDU',</span> <span class="pre">color=&lt;ColorMap.ORANGE:</span> <span class="pre">'#F08650'&gt;),</span> <span class="pre">'L.nrrd':</span> <span class="pre">LabelCombined(id=11,</span> <span class="pre">label='L',</span> <span class="pre">color=&lt;ColorMap.GRAPE:</span> <span class="pre">'#604F9C'&gt;),</span> <span class="pre">'M0.nrrd':</span> <span class="pre">LabelCombined(id=17,</span> <span class="pre">label='M',</span> <span class="pre">color=&lt;ColorMap.GREY:</span> <span class="pre">'#C0C0C0'&gt;),</span> <span class="pre">'M1.nrrd':</span> <span class="pre">LabelCombined(id=17,</span> <span class="pre">label='M',</span> <span class="pre">color=&lt;ColorMap.GREY:</span> <span class="pre">'#C0C0C0'&gt;),</span> <span class="pre">'P1DU1.nrrd':</span> <span class="pre">LabelCombined(id=12,</span> <span class="pre">label='p1DU1',</span> <span class="pre">color=&lt;ColorMap.ROYAL_BLUE:</span> <span class="pre">'#252958'&gt;),</span> <span class="pre">'PDR.nrrd':</span> <span class="pre">LabelCombined(id=9,</span> <span class="pre">label='p1DR1',</span> <span class="pre">color=&lt;ColorMap.LAVENDER:</span> <span class="pre">'#C2A5CC'&gt;),</span> <span class="pre">'R.nrrd':</span> <span class="pre">LabelCombined(id=1,</span> <span class="pre">label='dR',</span> <span class="pre">color=&lt;ColorMap.LIGHT_GREEN:</span> <span class="pre">'#91C67B'&gt;),</span> <span class="pre">'Ulna</span> <span class="pre">Borken.nrrd':</span> <span class="pre">LabelCombined(id=-1,</span> <span class="pre">label='ulna',</span> <span class="pre">color=&lt;ColorMap.DARK_GREY:</span> <span class="pre">'#808080'&gt;),</span> <span class="pre">'Ulna</span> <span class="pre">Broken.nrrd':</span> <span class="pre">LabelCombined(id=-1,</span> <span class="pre">label='ulna',</span> <span class="pre">color=&lt;ColorMap.DARK_GREY:</span> <span class="pre">'#808080'&gt;),</span> <span class="pre">'Ulna</span> <span class="pre">broken.nrrd':</span> <span class="pre">LabelCombined(id=-1,</span> <span class="pre">label='ulna',</span> <span class="pre">color=&lt;ColorMap.DARK_GREY:</span> <span class="pre">'#808080'&gt;),</span> <span class="pre">'Ulna.nrrd':</span> <span class="pre">LabelCombined(id=-1,</span> <span class="pre">label='ulna',</span> <span class="pre">color=&lt;ColorMap.DARK_GREY:</span> <span class="pre">'#808080'&gt;),</span> <span class="pre">'VR.nrrd':</span> <span class="pre">LabelCombined(id=7,</span> <span class="pre">label='dVR',</span> <span class="pre">color=&lt;ColorMap.BROWN:</span> <span class="pre">'#784315'&gt;),</span> <span class="pre">'VU.nrrd':</span> <span class="pre">LabelCombined(id=6,</span> <span class="pre">label='dVU',</span> <span class="pre">color=&lt;ColorMap.INDIGO:</span> <span class="pre">'#615F84'&gt;),</span> <span class="pre">'dC.nrrd':</span> <span class="pre">LabelCombined(id=8,</span> <span class="pre">label='dRest',</span> <span class="pre">color=&lt;ColorMap.PINK:</span> <span class="pre">'#EF88BE'&gt;),</span> <span class="pre">'dD.nrrd':</span> <span class="pre">LabelCombined(id=3,</span> <span class="pre">label='dDC',</span> <span class="pre">color=&lt;ColorMap.BLUE:</span> <span class="pre">'#9FFCFD'&gt;),</span> <span class="pre">'dDC.nrrd':</span> <span class="pre">LabelCombined(id=3,</span> <span class="pre">label='dDC',</span> <span class="pre">color=&lt;ColorMap.BLUE:</span> <span class="pre">'#9FFCFD'&gt;),</span> <span class="pre">'dDR.nrrd':</span> <span class="pre">LabelCombined(id=2,</span> <span class="pre">label='dDR',</span> <span class="pre">color=&lt;ColorMap.PEACH:</span> <span class="pre">'#F8BE9F'&gt;),</span> <span class="pre">'dDRU.nrrd':</span> <span class="pre">LabelCombined(id=3,</span> <span class="pre">label='dDC',</span> <span class="pre">color=&lt;ColorMap.BLUE:</span> <span class="pre">'#9FFCFD'&gt;),</span> <span class="pre">'dDU.nrrd':</span> <span class="pre">LabelCombined(id=4,</span> <span class="pre">label='dDU',</span> <span class="pre">color=&lt;ColorMap.ORANGE:</span> <span class="pre">'#F08650'&gt;),</span> <span class="pre">'dDU1.nrrd':</span> <span class="pre">LabelCombined(id=4,</span> <span class="pre">label='dDU',</span> <span class="pre">color=&lt;ColorMap.ORANGE:</span> <span class="pre">'#F08650'&gt;),</span> <span class="pre">'dDU2.nrrd':</span> <span class="pre">LabelCombined(id=5,</span> <span class="pre">label='dU',</span> <span class="pre">color=&lt;ColorMap.MAGENTA:</span> <span class="pre">'#D1115B'&gt;),</span> <span class="pre">'dINTACT.nrrd':</span> <span class="pre">LabelCombined(id=8,</span> <span class="pre">label='dRest',</span> <span class="pre">color=&lt;ColorMap.PINK:</span> <span class="pre">'#EF88BE'&gt;),</span> <span class="pre">'dIntact.nrrd':</span> <span class="pre">LabelCombined(id=8,</span> <span class="pre">label='dRest',</span> <span class="pre">color=&lt;ColorMap.PINK:</span> <span class="pre">'#EF88BE'&gt;),</span> <span class="pre">'dL.nrrd':</span> <span class="pre">LabelCombined(id=3,</span> <span class="pre">label='dDC',</span> <span class="pre">color=&lt;ColorMap.BLUE:</span> <span class="pre">'#9FFCFD'&gt;),</span> <span class="pre">'dLU.nrrd':</span> <span class="pre">LabelCombined(id=4,</span> <span class="pre">label='dDU',</span> <span class="pre">color=&lt;ColorMap.ORANGE:</span> <span class="pre">'#F08650'&gt;),</span> <span class="pre">'dR-U.nrrd':</span> <span class="pre">LabelCombined(id=8,</span> <span class="pre">label='dRest',</span> <span class="pre">color=&lt;ColorMap.PINK:</span> <span class="pre">'#EF88BE'&gt;),</span> <span class="pre">'dR.nrrd':</span> <span class="pre">LabelCombined(id=1,</span> <span class="pre">label='dR',</span> <span class="pre">color=&lt;ColorMap.LIGHT_GREEN:</span> <span class="pre">'#91C67B'&gt;),</span> <span class="pre">'dRU</span> <span class="pre">cli.nrrd':</span> <span class="pre">LabelCombined(id=8,</span> <span class="pre">label='dRest',</span> <span class="pre">color=&lt;ColorMap.PINK:</span> <span class="pre">'#EF88BE'&gt;),</span> <span class="pre">'dRU.nrrd':</span> <span class="pre">LabelCombined(id=8,</span> <span class="pre">label='dRest',</span> <span class="pre">color=&lt;ColorMap.PINK:</span> <span class="pre">'#EF88BE'&gt;),</span> <span class="pre">'dU.nrrd':</span> <span class="pre">LabelCombined(id=5,</span> <span class="pre">label='dU',</span> <span class="pre">color=&lt;ColorMap.MAGENTA:</span> <span class="pre">'#D1115B'&gt;),</span> <span class="pre">'dV.nrrd':</span> <span class="pre">LabelCombined(id=8,</span> <span class="pre">label='dRest',</span> <span class="pre">color=&lt;ColorMap.PINK:</span> <span class="pre">'#EF88BE'&gt;),</span> <span class="pre">'dVC.nrrd':</span> <span class="pre">LabelCombined(id=8,</span> <span class="pre">label='dRest',</span> <span class="pre">color=&lt;ColorMap.PINK:</span> <span class="pre">'#EF88BE'&gt;),</span> <span class="pre">'dVR.nrrd':</span> <span class="pre">LabelCombined(id=7,</span> <span class="pre">label='dVR',</span> <span class="pre">color=&lt;ColorMap.BROWN:</span> <span class="pre">'#784315'&gt;),</span> <span class="pre">'dVRU.nrrd':</span> <span class="pre">LabelCombined(id=7,</span> <span class="pre">label='dVR',</span> <span class="pre">color=&lt;ColorMap.BROWN:</span> <span class="pre">'#784315'&gt;),</span> <span class="pre">'dVU.nrrd':</span> <span class="pre">LabelCombined(id=6,</span> <span class="pre">label='dVU',</span> <span class="pre">color=&lt;ColorMap.INDIGO:</span> <span class="pre">'#615F84'&gt;),</span> <span class="pre">'p1DR</span> <span class="pre">fin.nrrd':</span> <span class="pre">LabelCombined(id=9,</span> <span class="pre">label='p1DR1',</span> <span class="pre">color=&lt;ColorMap.LAVENDER:</span> <span class="pre">'#C2A5CC'&gt;),</span> <span class="pre">'p1DR.nrrd':</span> <span class="pre">LabelCombined(id=9,</span> <span class="pre">label='p1DR1',</span> <span class="pre">color=&lt;ColorMap.LAVENDER:</span> <span class="pre">'#C2A5CC'&gt;),</span> <span class="pre">'p1DR1.nrrd':</span> <span class="pre">LabelCombined(id=9,</span> <span class="pre">label='p1DR1',</span> <span class="pre">color=&lt;ColorMap.LAVENDER:</span> <span class="pre">'#C2A5CC'&gt;),</span> <span class="pre">'p1DR2.nrrd':</span> <span class="pre">LabelCombined(id=10,</span> <span class="pre">label='p1DR2',</span> <span class="pre">color=&lt;ColorMap.TEAL:</span> <span class="pre">'#176079'&gt;),</span> <span class="pre">'p1DR3.nrrd':</span> <span class="pre">LabelCombined(id=11,</span> <span class="pre">label='L',</span> <span class="pre">color=&lt;ColorMap.GRAPE:</span> <span class="pre">'#604F9C'&gt;),</span> <span class="pre">'p1DU.nrrd':</span> <span class="pre">LabelCombined(id=12,</span> <span class="pre">label='p1DU1',</span> <span class="pre">color=&lt;ColorMap.ROYAL_BLUE:</span> <span class="pre">'#252958'&gt;),</span> <span class="pre">'p1DU1.nrrd':</span> <span class="pre">LabelCombined(id=12,</span> <span class="pre">label='p1DU1',</span> <span class="pre">color=&lt;ColorMap.ROYAL_BLUE:</span> <span class="pre">'#252958'&gt;),</span> <span class="pre">'p1DU2.nrrd':</span> <span class="pre">LabelCombined(id=14,</span> <span class="pre">label='p1DU2',</span> <span class="pre">color=&lt;ColorMap.YELLOW:</span> <span class="pre">'#FFFE91'&gt;),</span> <span class="pre">'p1L.nrrd':</span> <span class="pre">LabelCombined(id=11,</span> <span class="pre">label='L',</span> <span class="pre">color=&lt;ColorMap.GRAPE:</span> <span class="pre">'#604F9C'&gt;),</span> <span class="pre">'p1VR.nrrd':</span> <span class="pre">LabelCombined(id=15,</span> <span class="pre">label='p1VR1',</span> <span class="pre">color=&lt;ColorMap.GREEN:</span> <span class="pre">'#377D22'&gt;),</span> <span class="pre">'p1VR1.nrrd':</span> <span class="pre">LabelCombined(id=15,</span> <span class="pre">label='p1VR1',</span> <span class="pre">color=&lt;ColorMap.GREEN:</span> <span class="pre">'#377D22'&gt;),</span> <span class="pre">'p1VR2.nrrd':</span> <span class="pre">LabelCombined(id=16,</span> <span class="pre">label='p1VR2',</span> <span class="pre">color=&lt;ColorMap.RED:</span> <span class="pre">'#EB3324'&gt;),</span> <span class="pre">'p1VU1.nrrd':</span> <span class="pre">LabelCombined(id=13,</span> <span class="pre">label='p1VU1',</span> <span class="pre">color=&lt;ColorMap.PURPLE:</span> <span class="pre">'#741B7C'&gt;),</span> <span class="pre">'p1VU2.nrrd':</span> <span class="pre">LabelCombined(id=14,</span> <span class="pre">label='p1DU2',</span> <span class="pre">color=&lt;ColorMap.YELLOW:</span> <span class="pre">'#FFFE91'&gt;),</span> <span class="pre">'p2DR.nrrd':</span> <span class="pre">LabelCombined(id=7,</span> <span class="pre">label='dVR',</span> <span class="pre">color=&lt;ColorMap.BROWN:</span> <span class="pre">'#784315'&gt;),</span> <span class="pre">'p2DR1.nrrd':</span> <span class="pre">LabelCombined(id=7,</span> <span class="pre">label='dVR',</span> <span class="pre">color=&lt;ColorMap.BROWN:</span> <span class="pre">'#784315'&gt;),</span> <span class="pre">'p2DR2.nrrd':</span> <span class="pre">LabelCombined(id=1,</span> <span class="pre">label='dR',</span> <span class="pre">color=&lt;ColorMap.LIGHT_GREEN:</span> <span class="pre">'#91C67B'&gt;),</span> <span class="pre">'p2DU.nrrd':</span> <span class="pre">LabelCombined(id=2,</span> <span class="pre">label='dDR',</span> <span class="pre">color=&lt;ColorMap.PEACH:</span> <span class="pre">'#F8BE9F'&gt;),</span> <span class="pre">'p2DU1.nrrd':</span> <span class="pre">LabelCombined(id=2,</span> <span class="pre">label='dDR',</span> <span class="pre">color=&lt;ColorMap.PEACH:</span> <span class="pre">'#F8BE9F'&gt;),</span> <span class="pre">'p2DU2.nrrd':</span> <span class="pre">LabelCombined(id=5,</span> <span class="pre">label='dU',</span> <span class="pre">color=&lt;ColorMap.MAGENTA:</span> <span class="pre">'#D1115B'&gt;),</span> <span class="pre">'p2L.nrrd':</span> <span class="pre">LabelCombined(id=11,</span> <span class="pre">label='L',</span> <span class="pre">color=&lt;ColorMap.GRAPE:</span> <span class="pre">'#604F9C'&gt;),</span> <span class="pre">'p2VR.nrrd':</span> <span class="pre">LabelCombined(id=10,</span> <span class="pre">label='p1DR2',</span> <span class="pre">color=&lt;ColorMap.TEAL:</span> <span class="pre">'#176079'&gt;),</span> <span class="pre">'p2VR1.nrrd':</span> <span class="pre">LabelCombined(id=10,</span> <span class="pre">label='p1DR2',</span> <span class="pre">color=&lt;ColorMap.TEAL:</span> <span class="pre">'#176079'&gt;),</span> <span class="pre">'pDC.nrrd':</span> <span class="pre">LabelCombined(id=11,</span> <span class="pre">label='L',</span> <span class="pre">color=&lt;ColorMap.GRAPE:</span> <span class="pre">'#604F9C'&gt;),</span> <span class="pre">'pDR.nrrd':</span> <span class="pre">LabelCombined(id=9,</span> <span class="pre">label='p1DR1',</span> <span class="pre">color=&lt;ColorMap.LAVENDER:</span> <span class="pre">'#C2A5CC'&gt;),</span> <span class="pre">'pDR1.nrrd':</span> <span class="pre">LabelCombined(id=9,</span> <span class="pre">label='p1DR1',</span> <span class="pre">color=&lt;ColorMap.LAVENDER:</span> <span class="pre">'#C2A5CC'&gt;),</span> <span class="pre">'pDR2.nrrd':</span> <span class="pre">LabelCombined(id=10,</span> <span class="pre">label='p1DR2',</span> <span class="pre">color=&lt;ColorMap.TEAL:</span> <span class="pre">'#176079'&gt;),</span> <span class="pre">'pDR3.nrrd':</span> <span class="pre">LabelCombined(id=11,</span> <span class="pre">label='L',</span> <span class="pre">color=&lt;ColorMap.GRAPE:</span> <span class="pre">'#604F9C'&gt;),</span> <span class="pre">'pDU.nrrd':</span> <span class="pre">LabelCombined(id=12,</span> <span class="pre">label='p1DU1',</span> <span class="pre">color=&lt;ColorMap.ROYAL_BLUE:</span> <span class="pre">'#252958'&gt;),</span> <span class="pre">'pDU1.nrrd':</span> <span class="pre">LabelCombined(id=12,</span> <span class="pre">label='p1DU1',</span> <span class="pre">color=&lt;ColorMap.ROYAL_BLUE:</span> <span class="pre">'#252958'&gt;),</span> <span class="pre">'pDU2.nrrd':</span> <span class="pre">LabelCombined(id=14,</span> <span class="pre">label='p1DU2',</span> <span class="pre">color=&lt;ColorMap.YELLOW:</span> <span class="pre">'#FFFE91'&gt;),</span> <span class="pre">'pU.nrrd':</span> <span class="pre">LabelCombined(id=16,</span> <span class="pre">label='p1VR2',</span> <span class="pre">color=&lt;ColorMap.RED:</span> <span class="pre">'#EB3324'&gt;),</span> <span class="pre">'pV.nrrd':</span> <span class="pre">LabelCombined(id=16,</span> <span class="pre">label='p1VR2',</span> <span class="pre">color=&lt;ColorMap.RED:</span> <span class="pre">'#EB3324'&gt;),</span> <span class="pre">'pVR</span> <span class="pre">cli.nrrd':</span> <span class="pre">LabelCombined(id=15,</span> <span class="pre">label='p1VR1',</span> <span class="pre">color=&lt;ColorMap.GREEN:</span> <span class="pre">'#377D22'&gt;),</span> <span class="pre">'pVR.nrrd':</span> <span class="pre">LabelCombined(id=15,</span> <span class="pre">label='p1VR1',</span> <span class="pre">color=&lt;ColorMap.GREEN:</span> <span class="pre">'#377D22'&gt;),</span> <span class="pre">'pVR1.nrrd':</span> <span class="pre">LabelCombined(id=15,</span> <span class="pre">label='p1VR1',</span> <span class="pre">color=&lt;ColorMap.GREEN:</span> <span class="pre">'#377D22'&gt;),</span> <span class="pre">'pVR2.nrrd':</span> <span class="pre">LabelCombined(id=16,</span> <span class="pre">label='p1VR2',</span> <span class="pre">color=&lt;ColorMap.RED:</span> <span class="pre">'#EB3324'&gt;),</span> <span class="pre">'pVU</span> <span class="pre">cli.nrrd':</span> <span class="pre">LabelCombined(id=13,</span> <span class="pre">label='p1VU1',</span> <span class="pre">color=&lt;ColorMap.PURPLE:</span> <span class="pre">'#741B7C'&gt;),</span> <span class="pre">'pVU.nrrd':</span> <span class="pre">LabelCombined(id=13,</span> <span class="pre">label='p1VU1',</span> <span class="pre">color=&lt;ColorMap.PURPLE:</span> <span class="pre">'#741B7C'&gt;),</span> <span class="pre">'pVU1.nrrd':</span> <span class="pre">LabelCombined(id=13,</span> <span class="pre">label='p1VU1',</span> <span class="pre">color=&lt;ColorMap.PURPLE:</span> <span class="pre">'#741B7C'&gt;),</span> <span class="pre">'pVU2.nrrd':</span> <span class="pre">LabelCombined(id=9,</span> <span class="pre">label='p1DR1',</span> <span class="pre">color=&lt;ColorMap.LAVENDER:</span> <span class="pre">'#C2A5CC'&gt;),</span> <span class="pre">'unknown.nrrd':</span> <span class="pre">LabelCombined(id=18,</span> <span class="pre">label='unknown',</span> <span class="pre">color=&lt;ColorMap.WHITE:</span> <span class="pre">'#FFFFFF'&gt;)}</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.Config.VISUAL_COMBINED_DICT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.Config.VISUAL_STRUCTURE">
+<span class="sig-name descname"><span class="pre">VISUAL_STRUCTURE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[Label(id=1,</span> <span class="pre">label='dR',</span> <span class="pre">color=&lt;ColorMap.LIGHT_GREEN:</span> <span class="pre">'#91C67B'&gt;,</span> <span class="pre">variations=['dR',</span> <span class="pre">'p2DR2',</span> <span class="pre">'R']),</span> <span class="pre">Label(id=2,</span> <span class="pre">label='dDR',</span> <span class="pre">color=&lt;ColorMap.PEACH:</span> <span class="pre">'#F8BE9F'&gt;,</span> <span class="pre">variations=['dDR',</span> <span class="pre">'p2DU1',</span> <span class="pre">'DR',</span> <span class="pre">'p2DU']),</span> <span class="pre">Label(id=3,</span> <span class="pre">label='dDC',</span> <span class="pre">color=&lt;ColorMap.BLUE:</span> <span class="pre">'#9FFCFD'&gt;,</span> <span class="pre">variations=['dDC',</span> <span class="pre">'dDRU',</span> <span class="pre">'dL',</span> <span class="pre">'dD']),</span> <span class="pre">Label(id=4,</span> <span class="pre">label='dDU',</span> <span class="pre">color=&lt;ColorMap.ORANGE:</span> <span class="pre">'#F08650'&gt;,</span> <span class="pre">variations=['dDU1',</span> <span class="pre">'dDU',</span> <span class="pre">'DU',</span> <span class="pre">'dLU']),</span> <span class="pre">Label(id=5,</span> <span class="pre">label='dU',</span> <span class="pre">color=&lt;ColorMap.MAGENTA:</span> <span class="pre">'#D1115B'&gt;,</span> <span class="pre">variations=['dU',</span> <span class="pre">'dDU2',</span> <span class="pre">'p2DU2']),</span> <span class="pre">Label(id=6,</span> <span class="pre">label='dVU',</span> <span class="pre">color=&lt;ColorMap.INDIGO:</span> <span class="pre">'#615F84'&gt;,</span> <span class="pre">variations=['dVU',</span> <span class="pre">'VU',</span> <span class="pre">'dVRU']),</span> <span class="pre">Label(id=7,</span> <span class="pre">label='dVR',</span> <span class="pre">color=&lt;ColorMap.BROWN:</span> <span class="pre">'#784315'&gt;,</span> <span class="pre">variations=['dVR',</span> <span class="pre">'dVRU',</span> <span class="pre">'p2DR1',</span> <span class="pre">'VR',</span> <span class="pre">'p2DR']),</span> <span class="pre">Label(id=8,</span> <span class="pre">label='dRest',</span> <span class="pre">color=&lt;ColorMap.PINK:</span> <span class="pre">'#EF88BE'&gt;,</span> <span class="pre">variations=['dC',</span> <span class="pre">'dVC',</span> <span class="pre">'dIntact',</span> <span class="pre">'dINTACT',</span> <span class="pre">'dV',</span> <span class="pre">'dR-U',</span> <span class="pre">'dRU',</span> <span class="pre">'dRU</span> <span class="pre">cli']),</span> <span class="pre">Label(id=9,</span> <span class="pre">label='p1DR1',</span> <span class="pre">color=&lt;ColorMap.LAVENDER:</span> <span class="pre">'#C2A5CC'&gt;,</span> <span class="pre">variations=['p1DR1',</span> <span class="pre">'p1VU2',</span> <span class="pre">'PDR',</span> <span class="pre">'p1DR',</span> <span class="pre">'p1DR</span> <span class="pre">fin',</span> <span class="pre">'pDR',</span> <span class="pre">'pDR1',</span> <span class="pre">'pVU2']),</span> <span class="pre">Label(id=10,</span> <span class="pre">label='p1DR2',</span> <span class="pre">color=&lt;ColorMap.TEAL:</span> <span class="pre">'#176079'&gt;,</span> <span class="pre">variations=['p1DR2',</span> <span class="pre">'p2VR1',</span> <span class="pre">'pDR2',</span> <span class="pre">'p2VR']),</span> <span class="pre">Label(id=11,</span> <span class="pre">label='L',</span> <span class="pre">color=&lt;ColorMap.GRAPE:</span> <span class="pre">'#604F9C'&gt;,</span> <span class="pre">variations=['L',</span> <span class="pre">'p1DR3',</span> <span class="pre">'p1L',</span> <span class="pre">'p2L',</span> <span class="pre">'pDC',</span> <span class="pre">'pDR3']),</span> <span class="pre">Label(id=12,</span> <span class="pre">label='p1DU1',</span> <span class="pre">color=&lt;ColorMap.ROYAL_BLUE:</span> <span class="pre">'#252958'&gt;,</span> <span class="pre">variations=['p1DU1',</span> <span class="pre">'p1DU',</span> <span class="pre">'P1DU1',</span> <span class="pre">'pDU',</span> <span class="pre">'pDU1']),</span> <span class="pre">Label(id=13,</span> <span class="pre">label='p1VU1',</span> <span class="pre">color=&lt;ColorMap.PURPLE:</span> <span class="pre">'#741B7C'&gt;,</span> <span class="pre">variations=['p1VU1',</span> <span class="pre">'pVU',</span> <span class="pre">'pVU</span> <span class="pre">cli',</span> <span class="pre">'pVU1']),</span> <span class="pre">Label(id=14,</span> <span class="pre">label='p1DU2',</span> <span class="pre">color=&lt;ColorMap.YELLOW:</span> <span class="pre">'#FFFE91'&gt;,</span> <span class="pre">variations=['p1DU2',</span> <span class="pre">'p1VU2',</span> <span class="pre">'p1VR2',</span> <span class="pre">'pDU2']),</span> <span class="pre">Label(id=15,</span> <span class="pre">label='p1VR1',</span> <span class="pre">color=&lt;ColorMap.GREEN:</span> <span class="pre">'#377D22'&gt;,</span> <span class="pre">variations=['p1VR1',</span> <span class="pre">'p1VR',</span> <span class="pre">'pVR1',</span> <span class="pre">'pVR',</span> <span class="pre">'pVR</span> <span class="pre">cli']),</span> <span class="pre">Label(id=16,</span> <span class="pre">label='p1VR2',</span> <span class="pre">color=&lt;ColorMap.RED:</span> <span class="pre">'#EB3324'&gt;,</span> <span class="pre">variations=['p1VR2',</span> <span class="pre">'pU',</span> <span class="pre">'pV',</span> <span class="pre">'pVR2']),</span> <span class="pre">Label(id=17,</span> <span class="pre">label='M',</span> <span class="pre">color=&lt;ColorMap.GREY:</span> <span class="pre">'#C0C0C0'&gt;,</span> <span class="pre">variations=['M1',</span> <span class="pre">'M0']),</span> <span class="pre">Label(id=18,</span> <span class="pre">label='unknown',</span> <span class="pre">color=&lt;ColorMap.WHITE:</span> <span class="pre">'#FFFFFF'&gt;,</span> <span class="pre">variations=['unknown']),</span> <span class="pre">Label(id=-1,</span> <span class="pre">label='ulna',</span> <span class="pre">color=&lt;ColorMap.DARK_GREY:</span> <span class="pre">'#808080'&gt;,</span> <span class="pre">variations=['Ulna</span> <span class="pre">broken',</span> <span class="pre">'Ulna</span> <span class="pre">Broken',</span> <span class="pre">'Ulna',</span> <span class="pre">'Ulna</span> <span class="pre">Borken'])]</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.Config.VISUAL_STRUCTURE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.Config.label">
+<span class="sig-name descname"><span class="pre">label</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">Label(id=18,</span> <span class="pre">label='unknown',</span> <span class="pre">color=&lt;ColorMap.WHITE:</span> <span class="pre">'#FFFFFF'&gt;,</span> <span class="pre">variations=['unknown'])</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.Config.label" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.Label">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">specifix.segmentation.cli.config.</span></span><span class="sig-name descname"><span class="pre">Label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#specifix.segmentation.cli.config.ColorMap" title="specifix.segmentation.cli.config.ColorMap"><span class="pre">specifix.segmentation.cli.config.ColorMap</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">variations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/config.html#Label"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.config.Label" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.Label.color">
+<span class="sig-name descname"><span class="pre">color</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#specifix.segmentation.cli.config.ColorMap" title="specifix.segmentation.cli.config.ColorMap"><span class="pre">ColorMap</span></a></em><a class="headerlink" href="#specifix.segmentation.cli.config.Label.color" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.Label.id">
+<span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.Label.id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.Label.label">
+<span class="sig-name descname"><span class="pre">label</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.Label.label" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.Label.to_dict">
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#specifix.segmentation.cli.config.LabelCombined" title="specifix.segmentation.cli.config.LabelCombined"><span class="pre">LabelCombined</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/specifix/segmentation/cli/config.html#Label.to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.config.Label.to_dict" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.Label.variations">
+<span class="sig-name descname"><span class="pre">variations</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#specifix.segmentation.cli.config.Label.variations" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.LabelCombined">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">specifix.segmentation.cli.config.</span></span><span class="sig-name descname"><span class="pre">LabelCombined</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#specifix.segmentation.cli.config.ColorMap" title="specifix.segmentation.cli.config.ColorMap"><span class="pre">specifix.segmentation.cli.config.ColorMap</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/config.html#LabelCombined"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.config.LabelCombined" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.LabelCombined.color">
+<span class="sig-name descname"><span class="pre">color</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#specifix.segmentation.cli.config.ColorMap" title="specifix.segmentation.cli.config.ColorMap"><span class="pre">ColorMap</span></a></em><a class="headerlink" href="#specifix.segmentation.cli.config.LabelCombined.color" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.LabelCombined.id">
+<span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.LabelCombined.id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.config.LabelCombined.label">
+<span class="sig-name descname"><span class="pre">label</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#specifix.segmentation.cli.config.LabelCombined.label" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </section>
-<section id="specifix-segmentation-cli-converter-module">
-<h2>specifix.segmentation.cli.converter module<a class="headerlink" href="#specifix-segmentation-cli-converter-module" title="Link to this heading">¶</a></h2>
-</section>
-<section id="specifix-segmentation-cli-generator-module">
-<h2>specifix.segmentation.cli.generator module<a class="headerlink" href="#specifix-segmentation-cli-generator-module" title="Link to this heading">¶</a></h2>
-</section>
-<section id="specifix-segmentation-cli-mesh-module">
-<h2>specifix.segmentation.cli.mesh module<a class="headerlink" href="#specifix-segmentation-cli-mesh-module" title="Link to this heading">¶</a></h2>
-</section>
-<section id="specifix-segmentation-cli-shell-module">
-<h2>specifix.segmentation.cli.shell module<a class="headerlink" href="#specifix-segmentation-cli-shell-module" title="Link to this heading">¶</a></h2>
-</section>
-<section id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
-</section>
-</section>
+<section id="module-specifix.segmentation.cli.converter">
+<span id="specifix-segmentation-cli-converter-module"></span><h2>specifix.segmentation.cli.converter module<a class="headerlink" href="#module-specifix.segmentation.cli.converter" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.converter.Converter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">specifix.segmentation.cli.converter.</span></span><span class="sig-name descname"><span class="pre">Converter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reference_filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/converter.html#Converter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.converter.Converter" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.converter.Converter.copy_metadata_from_array">
+<span class="sig-name descname"><span class="pre">copy_metadata_from_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/converter.html#Converter.copy_metadata_from_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.converter.Converter.copy_metadata_from_array" title="Link to this definition"></a></dt>
+<dd><p>This function copies the metadata from an image to a new image which is generated from an numpy array and
+filtered for a specific label. If the label is <cite>None</cite>, then the metadata is copied to the original np.ndarray.
+:param image: sitk.Image The image that contains the desired metadata.
+:param array: np.ndarray The numpy array that should receive the metadata after it’s converted to sitk.Image.
+:param label: int Specifies if the array should be filtered for a specific label.
+:return: sitk.Image</p>
+</dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.converter.Converter.copy_metadata_from_image">
+<span class="sig-name descname"><span class="pre">copy_metadata_from_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/converter.html#Converter.copy_metadata_from_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.converter.Converter.copy_metadata_from_image" title="Link to this definition"></a></dt>
+<dd><p>This function copies the metadata from an sitk.Image and optionally filters it for a specific label.
+:param image: sitk.Image The image that contains the desired metadata.
+:param label:  int Specifies if the sitk.Image should be filtered for a specific label.
+:return: sitk.Image</p>
+</dd></dl>
 
-          </div>
-          
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="Main">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">Specifix</a></h1>
+<dl class="py method">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.converter.Converter.get_array_from_image">
+<span class="sig-name descname"><span class="pre">get_array_from_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Image</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/specifix/segmentation/cli/converter.html#Converter.get_array_from_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.converter.Converter.get_array_from_image" title="Link to this definition"></a></dt>
+<dd><p>This method abstracts the original GetArrayFromImage function. It’s made in this way because later on the
+library used to manipulate the CT scans can be easily changed.
+:param image: sitk.Image
+:return: np.ndarray.</p>
+</dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.converter.Converter.get_image_from_array">
+<span class="sig-name descname"><span class="pre">get_image_from_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Image</span></span></span><a class="reference internal" href="_modules/specifix/segmentation/cli/converter.html#Converter.get_image_from_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.converter.Converter.get_image_from_array" title="Link to this definition"></a></dt>
+<dd><p>This method abstracts the original GetImageFromArray function. It’s made in this way because later on the
+library used to manipulate the CT scans can be easily changed.
+:param image: np.ndarray
+:return: sitk.Imag</p>
+</dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.converter.Converter.preprocess_image">
+<span class="sig-name descname"><span class="pre">preprocess_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Image</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Image</span></span></span><a class="reference internal" href="_modules/specifix/segmentation/cli/converter.html#Converter.preprocess_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.converter.Converter.preprocess_image" title="Link to this definition"></a></dt>
+<dd><p>DEPRECATED The idea of this function was to align the misaligned nifti files.
+:param image:
+:return:</p>
+</dd></dl>
 
-
-
-
-
-
-<h3>Navigation</h3>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-  </ul></li>
+<dl class="py method">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.converter.Converter.stack_nrrd">
+<span class="sig-name descname"><span class="pre">stack_nrrd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prev</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Image</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/converter.html#Converter.stack_nrrd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.converter.Converter.stack_nrrd" title="Link to this definition"></a></dt>
+<dd><p>This method stacks two images on top of each other. They should have teh same dimensions and channels. It’s
+implemented in a way that it can be called recursively multiple times. To start the loop it should first be
+called with ‘None’ as parameter for the ‘prev’ argument as there won’t abe a ‘prev’ argument during this time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>label</strong> – the string representation of the label.</p></li>
+<li><p><strong>prev</strong> – sitk.Image represents the old image that will be used as base. If it’s none then the function will</p></li>
 </ul>
-</div>
-<search id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
+</dd>
+</dl>
+<p>automatically return the new image as the stacked one.
+:param new: sitk.Image represents the new image that has to be stacked on top of the “prev” image.
+:return: sitk.Image</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.converter.Nifti">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">specifix.segmentation.cli.converter.</span></span><span class="sig-name descname"><span class="pre">Nifti</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_directory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/converter.html#Nifti"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.converter.Nifti" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.BoneIOFileManager" title="specifix.segmentation.cli.io.BoneIOFileManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">BoneIOFileManager</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.converter.Nifti.align">
+<span class="sig-name descname"><span class="pre">align</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nifti_filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/specifix/segmentation/cli/converter.html#Nifti.align"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.converter.Nifti.align" title="Link to this definition"></a></dt>
+<dd><p>DEPRECATED The idea of this function was to align the misaligned nifti files.
+:param nifti_filename:
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.converter.Nifti.align_all">
+<span class="sig-name descname"><span class="pre">align_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/converter.html#Nifti.align_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.converter.Nifti.align_all" title="Link to this definition"></a></dt>
+<dd><p>DEPRECATED
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.converter.Nifti.convert_all">
+<span class="sig-name descname"><span class="pre">convert_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/converter.html#Nifti.convert_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.converter.Nifti.convert_all" title="Link to this definition"></a></dt>
+<dd><p>Converts multiple nifti files to nrrds. Each nifti file will be stored in a separate folder as explained in
+the self.to_label_nrrds function.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.converter.Nifti.to_label_nrrds">
+<span class="sig-name descname"><span class="pre">to_label_nrrds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nifti_filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/specifix/segmentation/cli/converter.html#Nifti.to_label_nrrds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.converter.Nifti.to_label_nrrds" title="Link to this definition"></a></dt>
+<dd><p>Converts one nifti file to multiple nrrds as it created a folder structure of:
+CT_NAME</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>nrrd</dt><dd><ul>
+<li><p><em>converted files</em></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p>for each nifti file.
+:param nifti_filename: str representing the nifti filename that should be converted.
+:return: int returns the spacing of the nifti file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.converter.Nifti.to_label_tiffs">
+<span class="sig-name descname"><span class="pre">to_label_tiffs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nifti_filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/specifix/segmentation/cli/converter.html#Nifti.to_label_tiffs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.converter.Nifti.to_label_tiffs" title="Link to this definition"></a></dt>
+<dd><p>Converts one nifti file to tiffs stored in a separate folder with the following structure:
+unique label 1</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>tiffs</em></p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt>unique label 2</dt><dd><ul class="simple">
+<li><p><em>tiffs</em></p></li>
+</ul>
+</dd>
+<dt>unique label 3</dt><dd><ul class="simple">
+<li><p><em>tiffs</em></p></li>
+</ul>
+</dd>
+</dl>
+<p>for each unique label file.
+:param nifti_filename: str representing the nifti filename that should be converted.
+:return: int returns the spacing of the nifti file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.converter.Nifti.to_single_label_tiffs">
+<span class="sig-name descname"><span class="pre">to_single_label_tiffs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nifti_filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/specifix/segmentation/cli/converter.html#Nifti.to_single_label_tiffs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.converter.Nifti.to_single_label_tiffs" title="Link to this definition"></a></dt>
+<dd><p>Converts multiple labels to a single tiff folder. Can be used to merge multiple labels into one (binary)
+if required.
+Config.COMBINED_LABEL</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>tiffs</em></p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>nifti_filename</strong> – str representing the nifti filename that should be converted.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>int returns the spacing of the nifti file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-specifix.segmentation.cli.generator">
+<span id="specifix-segmentation-cli-generator-module"></span><h2>specifix.segmentation.cli.generator module<a class="headerlink" href="#module-specifix.segmentation.cli.generator" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.generator.DebugEntry">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">specifix.segmentation.cli.generator.</span></span><span class="sig-name descname"><span class="pre">DebugEntry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duplicates</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unknown</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/generator.html#DebugEntry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.generator.DebugEntry" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Defines the structure of the debug dictionary which in the ends stores some useful information.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.generator.DebugEntry.count">
+<span class="sig-name descname"><span class="pre">count</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#specifix.segmentation.cli.generator.DebugEntry.count" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.generator.DebugEntry.duplicates">
+<span class="sig-name descname"><span class="pre">duplicates</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#specifix.segmentation.cli.generator.DebugEntry.duplicates" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.generator.DebugEntry.unknown">
+<span class="sig-name descname"><span class="pre">unknown</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#specifix.segmentation.cli.generator.DebugEntry.unknown" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.generator.Generator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">specifix.segmentation.cli.generator.</span></span><span class="sig-name descname"><span class="pre">Generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_directory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/generator.html#Generator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.generator.Generator" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.BoneIOFileManager" title="specifix.segmentation.cli.io.BoneIOFileManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">BoneIOFileManager</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.generator.Generator.append_record">
+<span class="sig-name descname"><span class="pre">append_record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ct_scan</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Image</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/generator.html#Generator.append_record"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.generator.Generator.append_record" title="Link to this definition"></a></dt>
+<dd><p>This function appends/stacks one image on top of another image.
+:param ct_scan: str the filename of the nifti file used for debug purposes.
+:param filename: str the filename used for mapping the variation of each label to its original name.
+:param labels: dict which contains all variations of the labels. It should be in the following format.
+key: str, value: object. You can find more information in the Config file.
+:param f: sitk.Image represents the old image that will be used as base. If it’s none then the function will
+automatically return the new image as the stacked one.
+:param s: sitk.Image represents the new image that has to be stacked on top of the “prev” image.
+:return: sitk.Image</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.generator.Generator.clear">
+<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/generator.html#Generator.clear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.generator.Generator.clear" title="Link to this definition"></a></dt>
+<dd><p>This function clears the access_count_dictionary. If some of the lines are checks it can throw errors indicating
+that a single CT scan contains multiple nrrds for a single label.
+:return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.generator.Generator.process_all">
+<span class="sig-name descname"><span class="pre">process_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/generator.html#Generator.process_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.generator.Generator.process_all" title="Link to this definition"></a></dt>
+<dd><p>Process multiple CT scans.
+:return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.generator.Generator.process_single_ct_scan">
+<span class="sig-name descname"><span class="pre">process_single_ct_scan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ct_scan</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/generator.html#Generator.process_single_ct_scan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.generator.Generator.process_single_ct_scan" title="Link to this definition"></a></dt>
+<dd><p>This function reads all nrrds corresponding to the passed CT scan filename and appends them to a single nifti
+file.
+The CT scan should be stored in the following way:
+CT_SCAN_NAME</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>nrrd</dt><dd><ul>
+<li><p><em>files</em></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ct_scan</strong> – str the name of folder of the CT scan that contains its nrrds.</p></li>
+<li><p><strong>output_filename</strong> – str the output name of the generated nifti file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-specifix.segmentation.cli.mesh">
+<span id="specifix-segmentation-cli-mesh-module"></span><h2>specifix.segmentation.cli.mesh module<a class="headerlink" href="#module-specifix.segmentation.cli.mesh" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.mesh.Mesh">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">specifix.segmentation.cli.mesh.</span></span><span class="sig-name descname"><span class="pre">Mesh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_directory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/mesh.html#Mesh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.mesh.Mesh" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.BoneIOFileManager" title="specifix.segmentation.cli.io.BoneIOFileManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">BoneIOFileManager</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.mesh.Mesh.generate_mesh">
+<span class="sig-name descname"><span class="pre">generate_mesh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nifti_filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/mesh.html#Mesh.generate_mesh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.mesh.Mesh.generate_mesh" title="Link to this definition"></a></dt>
+<dd><p>This function generates the meshes from a nifti file. The amount of meshes depends on the amount of unque labels
+of the nifti file. It uses Threads to run the genration process in parallel and speed up the execution time.
+:param nifti_filename: str the name of the nifti file.
+:return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.mesh.Mesh.generate_meshes">
+<span class="sig-name descname"><span class="pre">generate_meshes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ct_scan</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/mesh.html#Mesh.generate_meshes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.mesh.Mesh.generate_meshes" title="Link to this definition"></a></dt>
+<dd><p>This function generates the meshes of multiple nrrd files for a single CT scan stored in the following way.
+dir</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>CT_SCAN_NAME</dt><dd><ul>
+<li><dl class="simple">
+<dt>nrrd</dt><dd><ul>
+<li><p><em>files</em></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ct_scan</strong> – str The name of the CT scan.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.mesh.Mesh.process_image_to_stl">
+<span class="sig-name descname"><span class="pre">process_image_to_stl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduction_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.9</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/mesh.html#Mesh.process_image_to_stl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.mesh.Mesh.process_image_to_stl" title="Link to this definition"></a></dt>
+<dd><p>This function generates the mesh based on the input image.
+:param image: sitk.Image The image that contains the data tha
+:param label: int The label that should be used to map the label value to its text representation.
+:param reduction_factor: float The reduction factor that should be used when generating the mesh.
+:return: None</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.mesh.Processor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">specifix.segmentation.cli.mesh.</span></span><span class="sig-name descname"><span class="pre">Processor</span></span><a class="reference internal" href="_modules/specifix/segmentation/cli/mesh.html#Processor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.mesh.Processor" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A utility class for processing VTK polydata using various filters and techniques for smoothing, resolution enhancement,
+cleaning, and connectivity analysis.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.mesh.Processor.apply_advanced_smooting_filter">
+<span class="sig-name descname"><span class="pre">apply_advanced_smooting_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">poly_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">vtkPolyData</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">120.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pass_band</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.001</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/mesh.html#Processor.apply_advanced_smooting_filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.mesh.Processor.apply_advanced_smooting_filter" title="Link to this definition"></a></dt>
+<dd><p>Applies advanced smoothing using the Windowed Sinc PolyData Filter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>poly_data</strong> (<em>vtk.vtkPolyData</em>) – The input polydata to smooth.</p></li>
+<li><p><strong>iterations</strong> (<em>int</em>) – Number of smoothing iterations. Default is 10.</p></li>
+<li><p><strong>feature_angle</strong> (<em>float</em>) – Feature angle to preserve edges. Default is 120.0 degrees.</p></li>
+<li><p><strong>pass_band</strong> (<em>float</em>) – Pass band value for smoothing. Default is 0.001.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Smoothed polydata.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>vtk.vtkPolyData</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.mesh.Processor.apply_cleaning">
+<span class="sig-name descname"><span class="pre">apply_cleaning</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">poly_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">vtkPolyData</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/mesh.html#Processor.apply_cleaning"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.mesh.Processor.apply_cleaning" title="Link to this definition"></a></dt>
+<dd><p>Cleans the input polydata by merging duplicate points and removing unused points.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>poly_data</strong> (<em>vtk.vtkPolyData</em>) – The input polydata to clean.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Cleaned polydata.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>vtk.vtkPolyData</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.mesh.Processor.apply_connectivity_filter">
+<span class="sig-name descname"><span class="pre">apply_connectivity_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">poly_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">vtkPolyData</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/mesh.html#Processor.apply_connectivity_filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.mesh.Processor.apply_connectivity_filter" title="Link to this definition"></a></dt>
+<dd><p>Applies a connectivity filter to the polydata to extract connected regions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>poly_data</strong> (<em>vtk.vtkPolyData</em>) – The input polydata.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Polydata with connected regions identified.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>vtk.vtkPolyData</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.mesh.Processor.apply_gausian_smooting">
+<span class="sig-name descname"><span class="pre">apply_gausian_smooting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">poly_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">vtkPolyData</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">standard_deviation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/mesh.html#Processor.apply_gausian_smooting"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.mesh.Processor.apply_gausian_smooting" title="Link to this definition"></a></dt>
+<dd><p>Applies Gaussian smoothing to the input polydata.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>poly_data</strong> (<em>vtk.vtkPolyData</em>) – The input polydata to smooth.</p></li>
+<li><p><strong>standard_deviation</strong> (<em>float</em>) – Standard deviation for Gaussian smoothing. Default is 0.5.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Smoothed polydata.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>vtk.vtkPolyData</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.mesh.Processor.apply_marshing_cubes">
+<span class="sig-name descname"><span class="pre">apply_marshing_cubes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">poly_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">vtkPolyData</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index_isosurface</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_isosurface</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/mesh.html#Processor.apply_marshing_cubes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.mesh.Processor.apply_marshing_cubes" title="Link to this definition"></a></dt>
+<dd><p>Extracts a surface using the Marching Cubes algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>poly_data</strong> (<em>vtk.vtkPolyData</em>) – The input polydata.</p></li>
+<li><p><strong>index_isosurface</strong> (<em>int</em>) – The isosurface index. Default is 0.</p></li>
+<li><p><strong>value_isosurface</strong> (<em>float</em>) – The isosurface value. Default is 0.5.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The extracted isosurface polydata.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>vtk.vtkPolyData</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.mesh.Processor.apply_subdivision_for_higher_resolution">
+<span class="sig-name descname"><span class="pre">apply_subdivision_for_higher_resolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">poly_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">vtkPolyData</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduction_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/mesh.html#Processor.apply_subdivision_for_higher_resolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.mesh.Processor.apply_subdivision_for_higher_resolution" title="Link to this definition"></a></dt>
+<dd><p>Reduces the resolution of the polydata by applying a subdivision filter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>poly_data</strong> (<em>vtk.vtkPolyData</em>) – The input polydata.</p></li>
+<li><p><strong>reduction_factor</strong> (<em>float</em>) – The target reduction factor (0.0 to 1.0). Higher values reduce more.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The resolution-reduced polydata.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>vtk.vtkPolyData</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-specifix.segmentation.cli.shell">
+<span id="specifix-segmentation-cli-shell-module"></span><h2>specifix.segmentation.cli.shell module<a class="headerlink" href="#module-specifix.segmentation.cli.shell" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.shell.Shell">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">specifix.segmentation.cli.shell.</span></span><span class="sig-name descname"><span class="pre">Shell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_directory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/shell.html#Shell"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.shell.Shell" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.BoneIOFileManager" title="specifix.segmentation.cli.io.BoneIOFileManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">BoneIOFileManager</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.shell.Shell.extract_outer_boundary">
+<span class="sig-name descname"><span class="pre">extract_outer_boundary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/shell.html#Shell.extract_outer_boundary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.shell.Shell.extract_outer_boundary" title="Link to this definition"></a></dt>
+<dd><p>Extract only the outer boundary of the object, ignoring any internal edges.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.shell.Shell.perform_morphological_closing">
+<span class="sig-name descname"><span class="pre">perform_morphological_closing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/shell.html#Shell.perform_morphological_closing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.shell.Shell.perform_morphological_closing" title="Link to this definition"></a></dt>
+<dd><p>Perform morphological closing (dilation followed by erosion) on the mask.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.shell.Shell.process_ct_scan">
+<span class="sig-name descname"><span class="pre">process_ct_scan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ct_scan</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels_output_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/shell.html#Shell.process_ct_scan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.shell.Shell.process_ct_scan" title="Link to this definition"></a></dt>
+<dd><p>This function generates a shell for a single CT scan. It loops through the nrrds and generates a nifti file
+with their shelled version.
+The CT scan should be stored in the following way:
+CT_SCAN_NAME</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>nrrd</dt><dd><ul>
+<li><p><em>files</em></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ct_scan</strong> – str the name of folder of the CT scan that contains its nrrds.</p></li>
+<li><p><strong>labels_output_path</strong> – str the output name of the generated nifti file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.shell.Shell.process_single_mask">
+<span class="sig-name descname"><span class="pre">process_single_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/shell.html#Shell.process_single_mask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.shell.Shell.process_single_mask" title="Link to this definition"></a></dt>
+<dd><p>This function converts each nrrd to its slices and applies the shell algorithm on eahc slice.
+:param mask: sitk.Image representing the current nrrd.
+:param filename: str ussed to filter junk files generated by the labeling software.
+:return: None/processed slices and the sitk.Image object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.shell.Shell.remove_inner_artifacts">
+<span class="sig-name descname"><span class="pre">remove_inner_artifacts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Image</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/shell.html#Shell.remove_inner_artifacts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.shell.Shell.remove_inner_artifacts" title="Link to this definition"></a></dt>
+<dd><p>Remove any small internal artifacts that may remain inside the object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="specifix.segmentation.cli.shell.Shell.thicken_boundary">
+<span class="sig-name descname"><span class="pre">thicken_boundary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/specifix/segmentation/cli/shell.html#Shell.thicken_boundary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#specifix.segmentation.cli.shell.Shell.thicken_boundary" title="Link to this definition"></a></dt>
+<dd><p>Thicken boundary lines to avoid breaking during erosion.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-specifix.segmentation.cli">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-specifix.segmentation.cli" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="specifix.segmentation.html" class="btn btn-neutral float-left" title="specifix.segmentation package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="specifix.segmentation.cli.io.html" class="btn btn-neutral float-right" title="specifix.segmentation.cli.io package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-</search>
-<script>document.getElementById('searchbox').style.display = "block"</script>
 
+  <hr/>
 
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, BUas.</p>
+  </div>
 
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
-
-
-
-
+</footer>
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &#169;2025, BUas.
-      
-      |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
-      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
-      
-      |
-      <a href="_sources/specifix.segmentation.cli.rst.txt"
-          rel="nofollow">Page source</a>
-    </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
-    
-
-    
-  </body>
+</body>
 </html>

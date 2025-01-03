@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>specifix.segmentation.cli.mesh &mdash; Specifix 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            Specifix
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules.html">specifix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../specifix.fracture_reduction.html">specifix.fracture_reduction package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../specifix.html">specifix package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../specifix.segmentation.cli.io.html">specifix.segmentation.cli.io package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../specifix.segmentation.cli.html">specifix.segmentation.cli package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../specifix.segmentation.html">specifix.segmentation package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Specifix</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">specifix.segmentation.cli.mesh</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for specifix.segmentation.cli.mesh</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timezone</span>
+
+<span class="kn">import</span> <span class="nn">vtk</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">SimpleITK</span> <span class="k">as</span> <span class="nn">sitk</span>
+
+<span class="kn">from</span> <span class="nn">vtkmodules.util</span> <span class="kn">import</span> <span class="n">numpy_support</span>
+<span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="kn">import</span> <span class="n">ThreadPoolExecutor</span>
+
+<span class="kn">from</span> <span class="nn">specifix.segmentation.cli.config</span> <span class="kn">import</span> <span class="n">Config</span>
+<span class="kn">from</span> <span class="nn">specifix.segmentation.cli.converter</span> <span class="kn">import</span> <span class="n">Converter</span>
+<span class="kn">from</span> <span class="nn">specifix.segmentation.cli.io</span> <span class="kn">import</span> <span class="n">BoneIOFileManager</span>
+
+
+<div class="viewcode-block" id="Processor">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.html#specifix.segmentation.cli.mesh.Processor">[docs]</a>
+<span class="k">class</span> <span class="nc">Processor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A utility class for processing VTK polydata using various filters and techniques for smoothing, resolution enhancement,</span>
+<span class="sd">    cleaning, and connectivity analysis.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the Processor object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+<div class="viewcode-block" id="Processor.apply_gausian_smooting">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.html#specifix.segmentation.cli.mesh.Processor.apply_gausian_smooting">[docs]</a>
+    <span class="k">def</span> <span class="nf">apply_gausian_smooting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">poly_data</span><span class="p">:</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPolyData</span><span class="p">,</span> <span class="n">standard_deviation</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Applies Gaussian smoothing to the input polydata.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            poly_data (vtk.vtkPolyData): The input polydata to smooth.</span>
+<span class="sd">            standard_deviation (float): Standard deviation for Gaussian smoothing. Default is 0.5.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            vtk.vtkPolyData: Smoothed polydata.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">gaussian</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkImageGaussianSmooth</span><span class="p">()</span>
+        <span class="n">gaussian</span><span class="o">.</span><span class="n">SetInputData</span><span class="p">(</span><span class="n">poly_data</span><span class="p">)</span>
+        <span class="n">gaussian</span><span class="o">.</span><span class="n">SetStandardDeviation</span><span class="p">(</span><span class="n">standard_deviation</span><span class="p">)</span>
+        <span class="n">gaussian</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">gaussian</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Processor.apply_marshing_cubes">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.html#specifix.segmentation.cli.mesh.Processor.apply_marshing_cubes">[docs]</a>
+    <span class="k">def</span> <span class="nf">apply_marshing_cubes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">poly_data</span><span class="p">:</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPolyData</span><span class="p">,</span> <span class="n">index_isosurface</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">value_isosurface</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extracts a surface using the Marching Cubes algorithm.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            poly_data (vtk.vtkPolyData): The input polydata.</span>
+<span class="sd">            index_isosurface (int): The isosurface index. Default is 0.</span>
+<span class="sd">            value_isosurface (float): The isosurface value. Default is 0.5.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            vtk.vtkPolyData: The extracted isosurface polydata.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">marching_cubes</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkMarchingCubes</span><span class="p">()</span>
+        <span class="n">marching_cubes</span><span class="o">.</span><span class="n">SetInputData</span><span class="p">(</span><span class="n">poly_data</span><span class="p">)</span>
+        <span class="n">marching_cubes</span><span class="o">.</span><span class="n">SetValue</span><span class="p">(</span><span class="n">index_isosurface</span><span class="p">,</span> <span class="n">value_isosurface</span><span class="p">)</span>
+        <span class="n">marching_cubes</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">marching_cubes</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Processor.apply_subdivision_for_higher_resolution">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.html#specifix.segmentation.cli.mesh.Processor.apply_subdivision_for_higher_resolution">[docs]</a>
+    <span class="k">def</span> <span class="nf">apply_subdivision_for_higher_resolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">poly_data</span><span class="p">:</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPolyData</span><span class="p">,</span> <span class="n">reduction_factor</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reduces the resolution of the polydata by applying a subdivision filter.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            poly_data (vtk.vtkPolyData): The input polydata.</span>
+<span class="sd">            reduction_factor (float): The target reduction factor (0.0 to 1.0). Higher values reduce more.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            vtk.vtkPolyData: The resolution-reduced polydata.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">decimate</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkDecimatePro</span><span class="p">()</span>
+        <span class="n">decimate</span><span class="o">.</span><span class="n">SetInputData</span><span class="p">(</span><span class="n">poly_data</span><span class="p">)</span>
+        <span class="n">decimate</span><span class="o">.</span><span class="n">SetTargetReduction</span><span class="p">(</span><span class="n">reduction_factor</span><span class="p">)</span>
+        <span class="n">decimate</span><span class="o">.</span><span class="n">PreserveTopologyOn</span><span class="p">()</span>
+        <span class="n">decimate</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">decimate</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Processor.apply_advanced_smooting_filter">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.html#specifix.segmentation.cli.mesh.Processor.apply_advanced_smooting_filter">[docs]</a>
+    <span class="k">def</span> <span class="nf">apply_advanced_smooting_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">poly_data</span><span class="p">:</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPolyData</span><span class="p">,</span> <span class="n">iterations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+                                       <span class="n">feature_angle</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">120.0</span><span class="p">,</span> <span class="n">pass_band</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.001</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Applies advanced smoothing using the Windowed Sinc PolyData Filter.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            poly_data (vtk.vtkPolyData): The input polydata to smooth.</span>
+<span class="sd">            iterations (int): Number of smoothing iterations. Default is 10.</span>
+<span class="sd">            feature_angle (float): Feature angle to preserve edges. Default is 120.0 degrees.</span>
+<span class="sd">            pass_band (float): Pass band value for smoothing. Default is 0.001.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            vtk.vtkPolyData: Smoothed polydata.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">smoother</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkWindowedSincPolyDataFilter</span><span class="p">()</span>
+        <span class="n">smoother</span><span class="o">.</span><span class="n">SetInputData</span><span class="p">(</span><span class="n">poly_data</span><span class="p">)</span>
+        <span class="n">smoother</span><span class="o">.</span><span class="n">SetNumberOfIterations</span><span class="p">(</span><span class="n">iterations</span><span class="p">)</span>
+        <span class="n">smoother</span><span class="o">.</span><span class="n">BoundarySmoothingOn</span><span class="p">()</span>
+        <span class="n">smoother</span><span class="o">.</span><span class="n">FeatureEdgeSmoothingOff</span><span class="p">()</span>
+        <span class="n">smoother</span><span class="o">.</span><span class="n">SetFeatureAngle</span><span class="p">(</span><span class="n">feature_angle</span><span class="p">)</span>
+        <span class="n">smoother</span><span class="o">.</span><span class="n">SetPassBand</span><span class="p">(</span><span class="n">pass_band</span><span class="p">)</span>
+        <span class="n">smoother</span><span class="o">.</span><span class="n">NonManifoldSmoothingOn</span><span class="p">()</span>
+        <span class="n">smoother</span><span class="o">.</span><span class="n">NormalizeCoordinatesOn</span><span class="p">()</span>
+        <span class="n">smoother</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">smoother</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Processor.apply_cleaning">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.html#specifix.segmentation.cli.mesh.Processor.apply_cleaning">[docs]</a>
+    <span class="k">def</span> <span class="nf">apply_cleaning</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">poly_data</span><span class="p">:</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPolyData</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Cleans the input polydata by merging duplicate points and removing unused points.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            poly_data (vtk.vtkPolyData): The input polydata to clean.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            vtk.vtkPolyData: Cleaned polydata.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cleaner</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkCleanPolyData</span><span class="p">()</span>
+        <span class="n">cleaner</span><span class="o">.</span><span class="n">SetInputData</span><span class="p">(</span><span class="n">poly_data</span><span class="p">)</span>
+        <span class="n">cleaner</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">cleaner</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Processor.apply_connectivity_filter">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.html#specifix.segmentation.cli.mesh.Processor.apply_connectivity_filter">[docs]</a>
+    <span class="k">def</span> <span class="nf">apply_connectivity_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">poly_data</span><span class="p">:</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPolyData</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Applies a connectivity filter to the polydata to extract connected regions.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            poly_data (vtk.vtkPolyData): The input polydata.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            vtk.vtkPolyData: Polydata with connected regions identified.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">connectivity_filter</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPolyDataConnectivityFilter</span><span class="p">()</span>
+        <span class="n">connectivity_filter</span><span class="o">.</span><span class="n">SetInputData</span><span class="p">(</span><span class="n">poly_data</span><span class="p">)</span>
+        <span class="n">connectivity_filter</span><span class="o">.</span><span class="n">SetExtractionModeToAllRegions</span><span class="p">()</span>
+        <span class="n">connectivity_filter</span><span class="o">.</span><span class="n">InitializeSpecifiedRegionList</span><span class="p">()</span>
+        <span class="n">connectivity_filter</span><span class="o">.</span><span class="n">ColorRegionsOn</span><span class="p">()</span>
+        <span class="n">connectivity_filter</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">connectivity_filter</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mesh">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.html#specifix.segmentation.cli.mesh.Mesh">[docs]</a>
+<span class="k">class</span> <span class="nc">Mesh</span><span class="p">(</span><span class="n">BoneIOFileManager</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">reference_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">input_directory</span><span class="p">,</span> <span class="n">output_directory</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Converter</span> <span class="o">=</span> <span class="n">Converter</span><span class="p">(</span><span class="n">reference_filename</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Processor</span> <span class="o">=</span> <span class="n">Processor</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mesh.process_image_to_stl">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.html#specifix.segmentation.cli.mesh.Mesh.process_image_to_stl">[docs]</a>
+    <span class="k">def</span> <span class="nf">process_image_to_stl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">:</span> <span class="n">sitk</span><span class="o">.</span><span class="n">Image</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">reduction_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.9</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function generates the mesh based on the input image.</span>
+<span class="sd">        :param image: sitk.Image The image that contains the data tha</span>
+<span class="sd">        :param label: int The label that should be used to map the label value to its text representation.</span>
+<span class="sd">        :param reduction_factor: float The reduction factor that should be used when generating the mesh.</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of slices: </span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">np_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Converter</span><span class="o">.</span><span class="n">get_array_from_image</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+        <span class="n">np_image</span> <span class="o">=</span> <span class="n">np_image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint16</span><span class="p">)</span>
+        <span class="n">num_slices</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">np_image</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">vtk_data_array</span> <span class="o">=</span> <span class="n">numpy_support</span><span class="o">.</span><span class="n">numpy_to_vtk</span><span class="p">(</span><span class="n">np_image</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">array_type</span><span class="o">=</span><span class="n">vtk</span><span class="o">.</span><span class="n">VTK_UNSIGNED_SHORT</span><span class="p">)</span>
+
+        <span class="n">reader</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkImageData</span><span class="p">()</span>
+        <span class="n">reader</span><span class="o">.</span><span class="n">SetDimensions</span><span class="p">(</span><span class="n">np_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">np_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">num_slices</span><span class="p">)</span>
+        <span class="n">reader</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">SetScalars</span><span class="p">(</span><span class="n">vtk_data_array</span><span class="p">)</span>
+        <span class="n">reader</span><span class="o">.</span><span class="n">SetExtent</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">num_slices</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">reader</span><span class="o">.</span><span class="n">SetOrigin</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">reader</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span>
+
+        <span class="n">changeFilter</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkImageChangeInformation</span><span class="p">()</span>
+        <span class="n">changeFilter</span><span class="o">.</span><span class="n">SetInputData</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DataSpacing: </span><span class="si">{</span><span class="n">image</span><span class="o">.</span><span class="n">GetSpacing</span><span class="p">()[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">changeFilter</span><span class="o">.</span><span class="n">SetSpacingScale</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">GetSpacing</span><span class="p">()[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="c1"># changeFilter.SetSpacingScale(0.6, 0.3, 0.3)</span>
+        <span class="c1"># changeFilter.SetSpacingScale(0.3, 0.3, 0.6)</span>
+        <span class="n">changeFilter</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
+
+        <span class="n">slicestack</span> <span class="o">=</span> <span class="n">changeFilter</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">slicestack</span><span class="o">.</span><span class="n">GetNumberOfPoints</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Failed to get valid output from changeFilter. Check your input data and parameters.&quot;</span><span class="p">)</span>
+
+        <span class="n">gaussian_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Processor</span><span class="o">.</span><span class="n">apply_gausian_smooting</span><span class="p">(</span><span class="n">slicestack</span><span class="p">,</span> <span class="n">standard_deviation</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+        <span class="n">marching_cubes_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Processor</span><span class="o">.</span><span class="n">apply_marshing_cubes</span><span class="p">(</span><span class="n">gaussian_output</span><span class="p">,</span>
+                                                                    <span class="n">index_isosurface</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                                                    <span class="n">value_isosurface</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+
+        <span class="n">decimate_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Processor</span><span class="o">.</span><span class="n">apply_subdivision_for_higher_resolution</span><span class="p">(</span><span class="n">marching_cubes_output</span><span class="p">,</span>
+                                                                                 <span class="n">reduction_factor</span><span class="p">)</span>
+
+        <span class="n">advanced_smooting_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Processor</span><span class="o">.</span><span class="n">apply_advanced_smooting_filter</span><span class="p">(</span><span class="n">decimate_output</span><span class="p">,</span>
+                                                                                 <span class="n">iterations</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                                                                                 <span class="n">feature_angle</span><span class="o">=</span><span class="mf">120.0</span><span class="p">,</span>
+                                                                                 <span class="n">pass_band</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+
+        <span class="n">cleaned_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Processor</span><span class="o">.</span><span class="n">apply_cleaning</span><span class="p">(</span><span class="n">advanced_smooting_output</span><span class="p">)</span>
+
+        <span class="n">connectivity_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Processor</span><span class="o">.</span><span class="n">apply_connectivity_filter</span><span class="p">(</span><span class="n">cleaned_output</span><span class="p">)</span>
+
+        <span class="n">component</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPolyData</span><span class="p">()</span>
+        <span class="n">component</span><span class="o">.</span><span class="n">DeepCopy</span><span class="p">(</span><span class="n">connectivity_output</span><span class="p">)</span>
+        <span class="n">cleanPolyData</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Processor</span><span class="o">.</span><span class="n">apply_cleaning</span><span class="p">(</span><span class="n">component</span><span class="p">)</span>
+        <span class="c1"># restore index from label (as it starts from 0)</span>
+        <span class="n">full_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_directory</span><span class="p">,</span>
+                                 <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">Config</span><span class="o">.</span><span class="n">DATA_STRUCTURE</span><span class="p">[</span><span class="n">label</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">label</span><span class="si">}</span><span class="s1">.stl&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">full_path</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;File already exists&#39;</span><span class="p">)</span>
+            <span class="n">tokens</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">full_path</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+            <span class="n">full_path</span> <span class="o">=</span> <span class="n">full_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                          <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y_%m_</span><span class="si">%d</span><span class="s2">_%H_%M_%S&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">writer</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkSTLWriter</span><span class="p">()</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">SetInputData</span><span class="p">(</span><span class="n">cleanPolyData</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">full_path</span><span class="p">),</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">full_path</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="n">writer</span><span class="o">.</span><span class="n">GetFileName</span><span class="p">())</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">Write</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Mesh.generate_mesh">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.html#specifix.segmentation.cli.mesh.Mesh.generate_mesh">[docs]</a>
+    <span class="k">def</span> <span class="nf">generate_mesh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nifti_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function generates the meshes from a nifti file. The amount of meshes depends on the amount of unque labels</span>
+<span class="sd">        of the nifti file. It uses Threads to run the genration process in parallel and speed up the execution time.</span>
+<span class="sd">        :param nifti_filename: str the name of the nifti file.</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">total_start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+
+        <span class="c1">#### STEP 1: convert nifti to a separate tiff folder for each label</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">nifti_filename</span><span class="p">)</span>
+
+        <span class="n">label_array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Converter</span><span class="o">.</span><span class="n">get_array_from_image</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="n">unique_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">label_array</span><span class="p">)</span>
+        <span class="n">unique_labels</span> <span class="o">=</span> <span class="n">unique_labels</span><span class="p">[</span><span class="n">unique_labels</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unique labels found: </span><span class="si">{</span><span class="n">unique_labels</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="c1">#### STEP 2: convert each tiff folder to one stl</span>
+        <span class="k">with</span> <span class="n">ThreadPoolExecutor</span><span class="p">()</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+            <span class="n">futures</span> <span class="o">=</span> <span class="p">[</span><span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">process_image_to_stl</span><span class="p">,</span>
+                                       <span class="bp">self</span><span class="o">.</span><span class="n">Converter</span><span class="o">.</span><span class="n">copy_metadata_from_array</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">label_array</span><span class="p">,</span>
+                                                                               <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">),</span>
+                                       <span class="n">label</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">)</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">unique_labels</span><span class="p">]</span>
+
+            <span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="n">futures</span><span class="p">:</span>
+                <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+
+        <span class="n">total_elapsed_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">total_start_time</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The script took </span><span class="si">{</span><span class="n">total_elapsed_time</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> seconds to run.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Mesh.generate_meshes">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.html#specifix.segmentation.cli.mesh.Mesh.generate_meshes">[docs]</a>
+    <span class="k">def</span> <span class="nf">generate_meshes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ct_scan</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function generates the meshes of multiple nrrd files for a single CT scan stored in the following way.</span>
+<span class="sd">        dir</span>
+<span class="sd">            - CT_SCAN_NAME</span>
+<span class="sd">                - nrrd</span>
+<span class="sd">                    - *files*</span>
+<span class="sd">        :param ct_scan: str The name of the CT scan.</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">total_start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+
+        <span class="n">current_files_iterator</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">((</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_inner_folder</span><span class="p">(</span><span class="n">ct_scan</span><span class="p">)</span>
+                                      <span class="o">.</span><span class="n">set_inner_folder</span><span class="p">(</span><span class="n">Config</span><span class="o">.</span><span class="n">NRRD_INNER_DIRECTORY</span><span class="p">)</span>
+                                      <span class="o">.</span><span class="n">read_all</span><span class="p">()</span> <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">Config</span><span class="o">.</span><span class="n">NRRD_EXTENSION</span><span class="p">)))</span>
+        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">current_files_iterator</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">generate_mesh</span><span class="p">(</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ct_scan</span><span class="p">,</span> <span class="n">Config</span><span class="o">.</span><span class="n">NRRD_INNER_DIRECTORY</span><span class="p">,</span> <span class="n">filename</span><span class="p">))</span>
+
+        <span class="n">total_elapsed_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">total_start_time</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The script took </span><span class="si">{</span><span class="n">total_elapsed_time</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> seconds to run.&quot;</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, BUas.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

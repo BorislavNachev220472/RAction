@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>specifix.segmentation.cli.converter &mdash; Specifix 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            Specifix
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules.html">specifix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../specifix.fracture_reduction.html">specifix.fracture_reduction package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../specifix.html">specifix package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../specifix.segmentation.cli.io.html">specifix.segmentation.cli.io package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../specifix.segmentation.cli.html">specifix.segmentation.cli package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../specifix.segmentation.html">specifix.segmentation package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Specifix</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">specifix.segmentation.cli.converter</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for specifix.segmentation.cli.converter</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">SimpleITK</span> <span class="k">as</span> <span class="nn">sitk</span>
+<span class="c1"># from warnings import deprecated</span>
+
+<span class="kn">from</span> <span class="nn">specifix.segmentation.cli.config</span> <span class="kn">import</span> <span class="n">Config</span>
+<span class="kn">from</span> <span class="nn">specifix.segmentation.cli.io</span> <span class="kn">import</span> <span class="n">BoneIOFileManager</span>
+
+
+<div class="viewcode-block" id="Converter">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.html#specifix.segmentation.cli.converter.Converter">[docs]</a>
+<span class="k">class</span> <span class="nc">Converter</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reference_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reference_image</span> <span class="o">=</span> <span class="n">sitk</span><span class="o">.</span><span class="n">ReadImage</span><span class="p">(</span><span class="n">reference_filename</span><span class="p">)</span>
+
+    <span class="c1"># @deprecated</span>
+<div class="viewcode-block" id="Converter.preprocess_image">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.html#specifix.segmentation.cli.converter.Converter.preprocess_image">[docs]</a>
+    <span class="k">def</span> <span class="nf">preprocess_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">:</span> <span class="n">sitk</span><span class="o">.</span><span class="n">Image</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">sitk</span><span class="o">.</span><span class="n">Image</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        DEPRECATED The idea of this function was to align the misaligned nifti files.</span>
+<span class="sd">        :param image:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">resampler</span> <span class="o">=</span> <span class="n">sitk</span><span class="o">.</span><span class="n">ResampleImageFilter</span><span class="p">()</span>
+        <span class="n">resampler</span><span class="o">.</span><span class="n">SetReferenceImage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reference_image</span><span class="p">)</span>
+        <span class="c1"># resampler.SetOutputDirection(self.reference_image.GetDirection())</span>
+        <span class="c1"># resampler.SetOutputOrigin(self.reference_image.GetOrigin())</span>
+        <span class="c1"># resampler.SetOutputSpacing(self.reference_image.GetSpacing())</span>
+        <span class="k">return</span> <span class="n">resampler</span><span class="o">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">image</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Converter.stack_nrrd">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.html#specifix.segmentation.cli.converter.Converter.stack_nrrd">[docs]</a>
+    <span class="k">def</span> <span class="nf">stack_nrrd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">prev</span><span class="p">:</span> <span class="n">sitk</span><span class="o">.</span><span class="n">Image</span><span class="p">,</span> <span class="n">new</span><span class="p">:</span> <span class="n">sitk</span><span class="o">.</span><span class="n">Image</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method stacks two images on top of each other. They should have teh same dimensions and channels. It&#39;s</span>
+<span class="sd">        implemented in a way that it can be called recursively multiple times. To start the loop it should first be</span>
+<span class="sd">        called with &#39;None&#39; as parameter for the &#39;prev&#39; argument as there won&#39;t abe a &#39;prev&#39; argument during this time.</span>
+
+<span class="sd">        :param label: the string representation of the label.</span>
+<span class="sd">        :param prev: sitk.Image represents the old image that will be used as base. If it&#39;s none then the function will</span>
+<span class="sd">        automatically return the new image as the stacked one.</span>
+<span class="sd">        :param new: sitk.Image represents the new image that has to be stacked on top of the &quot;prev&quot; image.</span>
+<span class="sd">        :return: sitk.Image</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">label</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">new</span> <span class="o">=</span> <span class="n">sitk</span><span class="o">.</span><span class="n">Cast</span><span class="p">(</span><span class="n">new</span><span class="p">,</span> <span class="n">sitk</span><span class="o">.</span><span class="n">sitkInt8</span><span class="p">)</span>
+            <span class="n">new</span><span class="p">[</span><span class="n">new</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">label</span>
+
+        <span class="k">if</span> <span class="n">prev</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">new</span>
+
+        <span class="k">if</span> <span class="n">prev</span><span class="o">.</span><span class="n">GetSize</span><span class="p">()</span> <span class="o">!=</span> <span class="n">new</span><span class="o">.</span><span class="n">GetSize</span><span class="p">():</span>
+            <span class="n">new</span> <span class="o">=</span> <span class="n">sitk</span><span class="o">.</span><span class="n">Resample</span><span class="p">(</span><span class="n">new</span><span class="p">,</span> <span class="n">prev</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">sitk</span><span class="o">.</span><span class="n">Maximum</span><span class="p">(</span><span class="n">prev</span><span class="p">,</span> <span class="n">new</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Converter.copy_metadata_from_image">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.html#specifix.segmentation.cli.converter.Converter.copy_metadata_from_image">[docs]</a>
+    <span class="k">def</span> <span class="nf">copy_metadata_from_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">:</span> <span class="n">sitk</span><span class="o">.</span><span class="n">Image</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function copies the metadata from an sitk.Image and optionally filters it for a specific label.</span>
+<span class="sd">        :param image: sitk.Image The image that contains the desired metadata.</span>
+<span class="sd">        :param label:  int Specifies if the sitk.Image should be filtered for a specific label.</span>
+<span class="sd">        :return: sitk.Image</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">sitk</span><span class="o">.</span><span class="n">GetArrayFromImage</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy_metadata_from_array</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Converter.copy_metadata_from_array">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.html#specifix.segmentation.cli.converter.Converter.copy_metadata_from_array">[docs]</a>
+    <span class="k">def</span> <span class="nf">copy_metadata_from_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">:</span> <span class="n">sitk</span><span class="o">.</span><span class="n">Image</span><span class="p">,</span> <span class="n">array</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function copies the metadata from an image to a new image which is generated from an numpy array and</span>
+<span class="sd">        filtered for a specific label. If the label is `None`, then the metadata is copied to the original np.ndarray.</span>
+<span class="sd">        :param image: sitk.Image The image that contains the desired metadata.</span>
+<span class="sd">        :param array: np.ndarray The numpy array that should receive the metadata after it&#39;s converted to sitk.Image.</span>
+<span class="sd">        :param label: int Specifies if the array should be filtered for a specific label.</span>
+<span class="sd">        :return: sitk.Image</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">label</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">array</span> <span class="o">=</span> <span class="p">(</span><span class="n">array</span> <span class="o">==</span> <span class="n">label</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+
+        <span class="n">image_sitk</span> <span class="o">=</span> <span class="n">sitk</span><span class="o">.</span><span class="n">GetImageFromArray</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+        <span class="n">image_sitk</span><span class="o">.</span><span class="n">CopyInformation</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">image_sitk</span></div>
+
+
+<div class="viewcode-block" id="Converter.get_array_from_image">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.html#specifix.segmentation.cli.converter.Converter.get_array_from_image">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_array_from_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">:</span> <span class="n">sitk</span><span class="o">.</span><span class="n">Image</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method abstracts the original GetArrayFromImage function. It&#39;s made in this way because later on the</span>
+<span class="sd">        library used to manipulate the CT scans can be easily changed.</span>
+<span class="sd">        :param image: sitk.Image</span>
+<span class="sd">        :return: np.ndarray.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">sitk</span><span class="o">.</span><span class="n">GetArrayFromImage</span><span class="p">(</span><span class="n">image</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Converter.get_image_from_array">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.html#specifix.segmentation.cli.converter.Converter.get_image_from_array">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_image_from_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">sitk</span><span class="o">.</span><span class="n">Image</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            This method abstracts the original GetImageFromArray function. It&#39;s made in this way because later on the</span>
+<span class="sd">            library used to manipulate the CT scans can be easily changed.</span>
+<span class="sd">            :param image: np.ndarray</span>
+<span class="sd">            :return: sitk.Imag</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">sitk</span><span class="o">.</span><span class="n">GetImageFromArray</span><span class="p">(</span><span class="n">array</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Nifti">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.html#specifix.segmentation.cli.converter.Nifti">[docs]</a>
+<span class="k">class</span> <span class="nc">Nifti</span><span class="p">(</span><span class="n">BoneIOFileManager</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_folder</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">reference_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">input_directory</span><span class="p">,</span> <span class="n">output_folder</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Converter</span> <span class="o">=</span> <span class="n">Converter</span><span class="p">(</span><span class="n">reference_filename</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Nifti.to_label_tiffs">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.html#specifix.segmentation.cli.converter.Nifti.to_label_tiffs">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_label_tiffs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nifti_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts one nifti file to tiffs stored in a separate folder with the following structure:</span>
+<span class="sd">        unique label 1</span>
+<span class="sd">            - *tiffs*</span>
+<span class="sd">        unique label 2</span>
+<span class="sd">            - *tiffs*</span>
+<span class="sd">        unique label 3</span>
+<span class="sd">            - *tiffs*</span>
+<span class="sd">        for each unique label file.</span>
+<span class="sd">        :param nifti_filename: str representing the nifti filename that should be converted.</span>
+<span class="sd">        :return: int returns the spacing of the nifti file.&quot;&quot;&quot;</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">nifti_filename</span><span class="p">)</span>
+
+        <span class="n">label_array</span> <span class="o">=</span> <span class="n">sitk</span><span class="o">.</span><span class="n">GetArrayFromImage</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="n">unique_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">label_array</span><span class="p">)</span>
+        <span class="n">unique_labels</span> <span class="o">=</span> <span class="n">unique_labels</span><span class="p">[</span><span class="n">unique_labels</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unique labels found: </span><span class="si">{</span><span class="n">unique_labels</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">unique_labels</span><span class="p">:</span>
+            <span class="c1"># filename = os.path.basename(nifti_filename).replace(Config.NIFTI_EXTENSION, &#39;&#39;)</span>
+            <span class="n">current_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Converter</span><span class="o">.</span><span class="n">copy_metadata_from_array</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">label_array</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">current_image</span><span class="o">.</span><span class="n">GetSize</span><span class="p">()[</span><span class="mi">2</span><span class="p">]):</span>
+                <span class="n">image_slice</span> <span class="o">=</span> <span class="n">current_image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">]</span>
+                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">set_inner_folder</span><span class="p">(</span><span class="n">Config</span><span class="o">.</span><span class="n">DATA_STRUCTURE</span><span class="p">[</span><span class="n">label</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">label</span><span class="p">)</span><span class="o">.</span><span class="n">save_file</span><span class="p">(</span>
+                    <span class="n">image</span><span class="o">=</span><span class="n">image_slice</span><span class="p">,</span>
+                    <span class="n">file_name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="si">}{</span><span class="n">Config</span><span class="o">.</span><span class="n">TIFF_EXTENSION</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+                    <span class="n">should_clean</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">image</span><span class="o">.</span><span class="n">GetSpacing</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Nifti.to_single_label_tiffs">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.html#specifix.segmentation.cli.converter.Nifti.to_single_label_tiffs">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_single_label_tiffs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nifti_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts multiple labels to a single tiff folder. Can be used to merge multiple labels into one (binary)</span>
+<span class="sd">        if required.</span>
+<span class="sd">        Config.COMBINED_LABEL</span>
+<span class="sd">            - *tiffs*</span>
+<span class="sd">        :param nifti_filename: str representing the nifti filename that should be converted.</span>
+<span class="sd">        :return: int returns the spacing of the nifti file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">nifti_filename</span><span class="p">)</span>
+
+        <span class="n">label_array</span> <span class="o">=</span> <span class="n">sitk</span><span class="o">.</span><span class="n">GetArrayFromImage</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="n">unique_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">label_array</span><span class="p">)</span>
+        <span class="n">unique_labels</span> <span class="o">=</span> <span class="n">unique_labels</span><span class="p">[</span><span class="n">unique_labels</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unique labels found: </span><span class="si">{</span><span class="n">unique_labels</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">stacked_image</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">unique_labels</span><span class="p">:</span>
+            <span class="n">current_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Converter</span><span class="o">.</span><span class="n">copy_metadata_from_array</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">label_array</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+            <span class="n">stacked_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Converter</span><span class="o">.</span><span class="n">stack_nrrd</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">stacked_image</span><span class="p">,</span> <span class="n">current_image</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">GetSize</span><span class="p">()[</span><span class="mi">2</span><span class="p">]):</span>
+            <span class="n">image_slice</span> <span class="o">=</span> <span class="n">stacked_image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">]</span>
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">set_output_folder</span><span class="p">(</span><span class="n">Config</span><span class="o">.</span><span class="n">COMBINED_LABEL</span><span class="p">)</span><span class="o">.</span><span class="n">save_file</span><span class="p">(</span>
+                <span class="n">image</span><span class="o">=</span><span class="n">image_slice</span><span class="p">,</span>
+                <span class="n">file_name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="si">}{</span><span class="n">Config</span><span class="o">.</span><span class="n">TIFF_EXTENSION</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+                <span class="n">should_clean</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">image</span><span class="o">.</span><span class="n">GetSpacing</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Nifti.to_label_nrrds">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.html#specifix.segmentation.cli.converter.Nifti.to_label_nrrds">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_label_nrrds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nifti_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts one nifti file to multiple nrrds as it created a folder structure of:</span>
+<span class="sd">        CT_NAME</span>
+<span class="sd">            - nrrd</span>
+<span class="sd">                - *converted files*</span>
+<span class="sd">        for each nifti file.</span>
+<span class="sd">        :param nifti_filename: str representing the nifti filename that should be converted.</span>
+<span class="sd">        :return: int returns the spacing of the nifti file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">nifti_filename</span><span class="p">)</span>
+
+        <span class="n">label_array</span> <span class="o">=</span> <span class="n">sitk</span><span class="o">.</span><span class="n">GetArrayFromImage</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="n">unique_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">label_array</span><span class="p">)</span>
+        <span class="n">unique_labels</span> <span class="o">=</span> <span class="n">unique_labels</span><span class="p">[</span><span class="n">unique_labels</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unique labels found: </span><span class="si">{</span><span class="n">unique_labels</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">unique_labels</span><span class="p">:</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">nifti_filename</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">Config</span><span class="o">.</span><span class="n">NIFTI_EXTENSION</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">set_output_folder</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">set_output_folder</span><span class="p">(</span><span class="n">Config</span><span class="o">.</span><span class="n">NRRD_INNER_DIRECTORY</span><span class="p">)</span><span class="o">.</span><span class="n">save_file</span><span class="p">(</span>
+                <span class="n">image</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">Converter</span><span class="o">.</span><span class="n">copy_metadata_from_array</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">label_array</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">),</span>
+                <span class="n">file_name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">Config</span><span class="o">.</span><span class="n">DATA_STRUCTURE</span><span class="p">[</span><span class="n">label</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">label</span><span class="si">}{</span><span class="n">Config</span><span class="o">.</span><span class="n">NRRD_EXTENSION</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+                <span class="n">should_clean</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">image</span><span class="o">.</span><span class="n">GetSpacing</span><span class="p">()</span></div>
+
+
+    <span class="c1"># @deprecated</span>
+<div class="viewcode-block" id="Nifti.align">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.html#specifix.segmentation.cli.converter.Nifti.align">[docs]</a>
+    <span class="k">def</span> <span class="nf">align</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nifti_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        DEPRECATED The idea of this function was to align the misaligned nifti files.</span>
+<span class="sd">        :param nifti_filename:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">nifti_filename</span><span class="p">)</span>
+
+        <span class="n">image_array</span> <span class="o">=</span> <span class="n">sitk</span><span class="o">.</span><span class="n">GetArrayFromImage</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="n">new_order</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">reordered_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">image_array</span><span class="p">,</span> <span class="n">new_order</span><span class="p">)</span>
+
+        <span class="n">reordered_array</span> <span class="o">=</span> <span class="n">reordered_array</span><span class="p">[:,</span> <span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+
+        <span class="n">image</span> <span class="o">=</span> <span class="n">sitk</span><span class="o">.</span><span class="n">GetImageFromArray</span><span class="p">(</span><span class="n">reordered_array</span><span class="p">)</span>
+
+        <span class="n">image</span><span class="o">.</span><span class="n">SetDirection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Converter</span><span class="o">.</span><span class="n">reference_image</span><span class="o">.</span><span class="n">GetDirection</span><span class="p">())</span>
+        <span class="n">image</span><span class="o">.</span><span class="n">SetOrigin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Converter</span><span class="o">.</span><span class="n">reference_image</span><span class="o">.</span><span class="n">GetSpacing</span><span class="p">())</span>
+        <span class="n">image</span><span class="o">.</span><span class="n">SetSpacing</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Converter</span><span class="o">.</span><span class="n">reference_image</span><span class="o">.</span><span class="n">GetOrigin</span><span class="p">())</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_file</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">Converter</span><span class="o">.</span><span class="n">copy_metadata_from_image</span><span class="p">(</span><span class="n">image</span><span class="p">),</span>
+                       <span class="n">file_name</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">nifti_filename</span><span class="p">))</span></div>
+
+
+    <span class="c1"># @deprecated</span>
+<div class="viewcode-block" id="Nifti.align_all">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.html#specifix.segmentation.cli.converter.Nifti.align_all">[docs]</a>
+    <span class="k">def</span> <span class="nf">align_all</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        DEPRECATED</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_directory</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Nifti.convert_all">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.html#specifix.segmentation.cli.converter.Nifti.convert_all">[docs]</a>
+    <span class="k">def</span> <span class="nf">convert_all</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Converts multiple nifti files to nrrds. Each nifti file will be stored in a separate folder as explained in</span>
+<span class="sd">            the self.to_label_nrrds function.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_directory</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">to_label_nrrds</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, BUas.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

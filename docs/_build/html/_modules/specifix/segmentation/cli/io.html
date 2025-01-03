@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>specifix.segmentation.cli.io &mdash; Specifix 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            Specifix
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules.html">specifix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../specifix.fracture_reduction.html">specifix.fracture_reduction package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../specifix.html">specifix package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../specifix.segmentation.cli.io.html">specifix.segmentation.cli.io package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../specifix.segmentation.cli.html">specifix.segmentation.cli package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../specifix.segmentation.html">specifix.segmentation package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Specifix</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">specifix.segmentation.cli.io</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for specifix.segmentation.cli.io</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">SimpleITK</span> <span class="k">as</span> <span class="nn">sitk</span>
+
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span> <span class="nn">specifix.segmentation.cli.io.calback</span> <span class="kn">import</span> <span class="n">reset_input_callback</span><span class="p">,</span> <span class="n">reset_output_callback</span>
+
+
+<div class="viewcode-block" id="IOManager">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.IOManager">[docs]</a>
+<span class="k">class</span> <span class="nc">IOManager</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines the abstract base class for IO managers.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="IOManager.read_all">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.IOManager.read_all">[docs]</a>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">read_all</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="IOManager.read_file">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.IOManager.read_file">[docs]</a>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">read_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">sitk</span><span class="o">.</span><span class="n">Image</span><span class="p">:</span>
+        <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="IOManager.save_file">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.IOManager.save_file">[docs]</a>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">save_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">:</span> <span class="n">sitk</span><span class="o">.</span><span class="n">Image</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="IOManager.set_inner_folder">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.IOManager.set_inner_folder">[docs]</a>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">set_inner_folder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inner_dict</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="IOManager.set_output_folder">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.IOManager.set_output_folder">[docs]</a>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">set_output_folder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_folder</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="IOManager.set_output_relative_to_input_dir">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.IOManager.set_output_relative_to_input_dir">[docs]</a>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">set_output_relative_to_input_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="BoneIOFileManager">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.BoneIOFileManager">[docs]</a>
+<span class="k">class</span> <span class="nc">BoneIOFileManager</span><span class="p">(</span><span class="n">IOManager</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input_directory</span> <span class="o">=</span> <span class="n">input_directory</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_directory</span> <span class="o">=</span> <span class="n">output_directory</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inner_directory</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_folder</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">output_directory</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_directory</span><span class="p">)</span>
+
+<div class="viewcode-block" id="BoneIOFileManager.set_inner_folder">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.BoneIOFileManager.set_inner_folder">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_inner_folder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inner_directory</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function utilizes the builder pattern and concatenates the passed directory to the current state of the</span>
+<span class="sd">        input_directory.</span>
+<span class="sd">        :param inner_directory: str the current directory hat will be merged with the existing one.</span>
+<span class="sd">        :return: object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inner_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inner_directory</span><span class="p">,</span> <span class="n">inner_directory</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="BoneIOFileManager.set_output_folder">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.BoneIOFileManager.set_output_folder">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_output_folder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_folder</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function utilizes the builder pattern and concatenates the passed directory to the current state of the</span>
+<span class="sd">        output_directory.</span>
+<span class="sd">        :param output_folder: str the current directory hat will be merged with the existing one.</span>
+<span class="sd">        :return: object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_folder</span><span class="p">,</span> <span class="n">output_folder</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="BoneIOFileManager.set_output_relative_to_input_dir">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.BoneIOFileManager.set_output_relative_to_input_dir">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_output_relative_to_input_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function utilizes the builder pattern and sets the output directory to be relative to the input directory.</span>
+<span class="sd">        :return: object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_directory</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">inner_directory</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="BoneIOFileManager.build">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.BoneIOFileManager.build">[docs]</a>
+    <span class="nd">@reset_input_callback</span>
+    <span class="nd">@reset_output_callback</span>
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function `builds` the object as it permanently sets the input directory to become the old onput directory</span>
+<span class="sd">        with the current state of the inner_directory. The same goes for the output directory.</span>
+<span class="sd">        :return: object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_directory</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_folder</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_directory</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">inner_directory</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="BoneIOFileManager.read_all">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.BoneIOFileManager.read_all">[docs]</a>
+    <span class="nd">@reset_input_callback</span>
+    <span class="k">def</span> <span class="nf">read_all</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reads all files at the current input directory. The directory is relative to the input directory as the</span>
+<span class="sd">        specified current inner directory is merged.</span>
+<span class="sd">        :return: list[str] with the names of all files in the that directory.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_directory</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">inner_directory</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="BoneIOFileManager.read_file">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.BoneIOFileManager.read_file">[docs]</a>
+    <span class="nd">@reset_input_callback</span>
+    <span class="k">def</span> <span class="nf">read_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">sitk</span><span class="o">.</span><span class="n">Image</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reads a file at a specific location. The location is relative to the input directory as the specified current</span>
+<span class="sd">        inner directory is merged.</span>
+<span class="sd">        :param file_name: str the input name ofthe file that should be read.</span>
+<span class="sd">        :return: sitl.Image</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">absolute_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_directory</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">inner_directory</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reading file: &#39;</span><span class="si">{</span><span class="n">absolute_path</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">sitk</span><span class="o">.</span><span class="n">ReadImage</span><span class="p">(</span><span class="n">absolute_path</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BoneIOFileManager.save_file">
+<a class="viewcode-back" href="../../../../specifix.segmentation.cli.io.html#specifix.segmentation.cli.io.BoneIOFileManager.save_file">[docs]</a>
+    <span class="nd">@reset_output_callback</span>
+    <span class="k">def</span> <span class="nf">save_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">:</span> <span class="n">sitk</span><span class="o">.</span><span class="n">Image</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">should_clean</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes a file at a specific location in a compressed way. The location is relative to the output directory as</span>
+<span class="sd">        the specified current output directory is merged. It can clear the folder if required.</span>
+<span class="sd">        :param image: sitk.Image that should be saved.</span>
+<span class="sd">        :param file_name: str the output name of the desired file</span>
+<span class="sd">        :param should_clean: bool specifies if the folder should be cleared or not.</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">current_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_directory</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_folder</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">current_directory</span><span class="p">)</span> <span class="ow">and</span> <span class="n">should_clean</span><span class="p">:</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">current_directory</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">current_directory</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">current_directory</span><span class="p">)</span>
+
+        <span class="n">absolute_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">current_directory</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span>
+        <span class="n">sitk</span><span class="o">.</span><span class="n">WriteImage</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">absolute_path</span><span class="p">,</span> <span class="n">useCompression</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saved file: &#39;</span><span class="si">{</span><span class="n">absolute_path</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, BUas.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
