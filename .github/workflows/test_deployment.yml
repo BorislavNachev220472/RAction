@@ -48,7 +48,7 @@ jobs:
       - name: Build the Docker image
         run: |
           poetry export --without-hashes --format=requirements.txt > requirements.txt
-          docker-compose build specifix_api
+          docker compose build specifix_api
       - name: Push Docker Image
         run: |
           docker tag specifix_api:latest plantphenotyper/specifix_test:auto
