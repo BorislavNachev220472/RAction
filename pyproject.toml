@@ -36,6 +36,7 @@ nnunetv2 = "2.2.1"
 acvl-utils = "0.2"
 poetry-plugin-export = "^1.8.0"
 
+
 [tool.poetry.group.docs.dependencies]
 sphinx = "^7.3.7"
 sphinx_rtd_theme = "2.0.0"

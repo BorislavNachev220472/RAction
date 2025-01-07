@@ -11,7 +11,10 @@ for item in next(os.walk(working_directory))[1]:
             for name in files:
                 path_file = os.path.join(path, name)
                 os.remove(path_file)
-                os.system(f'git rm {path_file}')
+                if os.path.isfile(path_file):
+                    os.system(f'git rm {path_file}')
+                else:
+                    os.system(f'git rm -r {path_file}')
 
 for path_file in [f for f in os.listdir('.') if os.path.isfile(f)]:
     os.remove(path_file)
