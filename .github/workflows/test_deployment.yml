@@ -45,15 +45,15 @@ jobs:
       - name: Install project
         run: poetry install --no-interaction
 
-      - name: Build the Docker image
-        run: |
-          poetry export --without-hashes --format=requirements.txt > requirements.txt
-          docker-compose build specifix_api
-      - name: Push Docker Image
-        run: |
-          docker tag specifix_api:latest plantphenotyper/specifix_test:auto
-          docker login -u plantphenotyper -p ${{ secrets.DOCKER }}
-          docker push plantphenotyper/specifix_test:auto
+      #      - name: Build the Docker image
+      #        run: |
+      #          poetry export --without-hashes --format=requirements.txt > requirements.txt
+      #          docker compose build specifix_api
+      #      - name: Push Docker Image
+      #        run: |
+      #          docker tag specifix_api:latest plantphenotyper/specifix_test:auto
+      #          docker login -u plantphenotyper -p ${{ secrets.DOCKER }}
+      #          docker push plantphenotyper/specifix_test:auto
 
       - name: Refresh docs
         if: ${{ hashFiles('docs/') != '' }}
@@ -62,6 +62,7 @@ jobs:
       - name: Generate docs
         run: |
           poetry run sphinx-quickstart docs --quiet -p Specifix -a BUas -v 1.0 -t config/
+          cp config/conf.py_t docs/conf.py
           poetry run sphinx-apidoc -o docs specifix/
           pip install sphinx-rtd-theme
           cd docs

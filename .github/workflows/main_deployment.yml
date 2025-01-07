@@ -46,22 +46,22 @@ jobs:
         run: poetry install --no-interaction
 
 
-      - name: Push to PyPl
-        run: |
-          poetry config pypi-token.pypi ${{ secrets.PYPL }}
-          poetry build
-          poetry publish
+      #      - name: Push to PyPl
+      #        run: |
+      #          poetry config pypi-token.pypi ${{ secrets.PYPL }}
+      #          poetry build
+      #          poetry publish
 
 
-      - name: Build the Docker image
-        run: |
-          poetry export --without-hashes --format=requirements.txt > requirements.txt
-          docker-compose build inference_api
-      - name: Push Docker Image
-        run: |
-          docker tag pyphenotyper:latest plantphenotyper/specifix:latest
-          docker login -u plantphenotyper -p ${{ secrets.DOCKER }}
-          docker push plantphenotyper/specifix:latest
+      #      - name: Build the Docker image
+      #        run: |
+      #          poetry export --without-hashes --format=requirements.txt > requirements.txt
+      #          docker compose build inference_api
+      #      - name: Push Docker Image
+      #        run: |
+      #          docker tag pyphenotyper:latest plantphenotyper/specifix:latest
+      #          docker login -u plantphenotyper -p ${{ secrets.DOCKER }}
+      #          docker push plantphenotyper/specifix:latest
 
       #      - name: 'Login via Azure CLI'
       #        uses: azure/login@v1
